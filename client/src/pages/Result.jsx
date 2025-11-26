@@ -26,7 +26,7 @@ export default function Result() {
         }}>
             <div className="win-box" style={{ borderColor: 'var(--alert-red)', background: '#000' }}>
                 <h1 style={{ color: 'var(--alert-red)', margin: '10px 0' }}>GAME OVER</h1>
-                <div style={{ fontSize: '14px', color: '#fff' }}>MVP: {room.winner}</div>
+                <div style={{ fontSize: '14px', color: '#fff' }}>정답자: {room.winner}</div>
             </div>
 
             <div className="win-box" style={{ textAlign: 'left', padding: '15px' }}>
@@ -40,7 +40,7 @@ export default function Result() {
 
             <div className="win-box">
                 <div>총 소요 시간: {Math.floor((Date.now() - room.startTime) / 1000 / 60)}분</div>
-                <div>오고간 질문: {room.messages.filter(m => m.type === 'QUESTION').length}개</div>
+                <div>총 질문 수: {room.messages.filter(m => m.type === 'QUESTION').length}개</div>
             </div>
 
             <button className="retro-btn"
