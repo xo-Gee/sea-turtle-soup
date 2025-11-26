@@ -25,4 +25,4 @@ services:
         fromService:
           type: web
           name: sea-turtle-soup-server
-          property: url
+          property: host
