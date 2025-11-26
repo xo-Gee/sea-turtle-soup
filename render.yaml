@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: sea-turtle-soup-server
+    env: node
+    plan: free
+    buildCommand: cd server && npm install
+    startCommand: cd server && npm start
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: CLIENT_URL
+        value: https://sea-turtle-soup-client.onrender.com
+
+  - type: static
+    name: sea-turtle-soup-client
+    env: static
+    buildCommand: cd client && npm install && npm run build
+    staticPublishPath: client/dist
+    envVars:
+      - key: VITE_SERVER_URL
+        fromService:
+          type: web
+          name: sea-turtle-soup-server
+          property: url
