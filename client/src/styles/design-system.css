@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap');
+@import url('https://cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@latest/neodgm/neodgm.css');
+
+:root {
+    --bg-color: #000000;
+    --main-green: #00ff41;
+    --dim-green: #008f11;
+    --alert-red: #ff0055;
+    --win-gray: #c0c0c0;
+    --win-dark: #808080;
+    --win-light: #ffffff;
+    --text-shadow: 0 0 5px var(--dim-green);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1a1a1a;
+    color: var(--main-green);
+    font-family: 'NeoDunggeunmo', 'VT323', monospace;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#root {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* --- Mockup Container Frame --- */
+.mockup-frame {
+    width: 375px;
+    height: 667px;
+    border: 20px solid #333;
+    border-radius: 20px;
+    position: relative;
+    background-color: var(--bg-color);
+    overflow: hidden;
+    box-shadow: 0 0 0 2px #555, 0 20px 50px rgba(0, 0, 0, 0.8);
+}
+
+/* CRT Effect Overlay */
+.crt-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+    z-index: 999;
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.7);
+}
+
+/* --- Common UI Components --- */
+.retro-btn {
+    background: var(--win-gray);
+    border-top: 2px solid var(--win-light);
+    border-left: 2px solid var(--win-light);
+    border-right: 2px solid #000;
+    border-bottom: 2px solid #000;
+    color: #000;
+    font-family: 'NeoDunggeunmo', monospace;
+    font-size: 18px;
+    font-weight: normal;
+    padding: 8px 10px 5px 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+.retro-btn:active {
+    border-top: 2px solid #000;
+    border-left: 2px solid #000;
+    border-right: 2px solid var(--win-light);
+    border-bottom: 2px solid var(--win-light);
+}
+
+.win-box {
+    border: 2px solid var(--main-green);
+    background: rgba(0, 20, 0, 0.8);
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 4px 4px 0px var(--dim-green);
+}
+
+.retro-input {
+    background: #000;
+    border: 2px solid var(--main-green);
+    color: var(--main-green);
+    font-family: 'NeoDunggeunmo', monospace;
+    font-size: 20px;
+    padding: 10px;
+    outline: none;
+}
+
+.ascii-logo {
+    white-space: pre;
+    font-family: 'VT323', monospace;
+    font-size: 10px;
+    line-height: 10px;
+    color: var(--main-green);
+    margin-bottom: 30px;
+    text-shadow: 0 0 5px var(--main-green);
+}
+
+.chat-area {
+    margin-bottom: 10px;
+    background: #000;
+    /* Darker background for chat */
+}
+
+.input-bar {
+    margin-bottom: 10px;
+    background: repeating-linear-gradient(0deg,
+            #c0c0c0,
+            #c0c0c0 2px,
+            #b0b0b0 2px,
+            #b0b0b0 4px);
+    /* Silver scanline effect */
+    border-top: 2px solid #fff;
+    border-bottom: 2px solid #000;
+    padding: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.msg {
+    max-width: 80%;
+    padding: 10px;
+    font-size: 16px;
+    position: relative;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.msg.me {
+    align-self: flex-end;
+    background: var(--main-green);
+    color: #000;
+    border: 2px solid #004400;
+    box-shadow: -4px 4px 0px rgba(0, 0, 0, 0.5);
+    /* Pixelated corners effect if possible, or just blocky */
+}
+
+.msg.other {
+    align-self: flex-start;
+    background: #333;
+    color: #fff;
+    border: 2px solid #555;
+    box-shadow: 4px 4px 0px #000;
+}
+
+.msg.clickable {
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.msg.clickable:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 10px var(--main-green);
+    border-color: var(--main-green);
+    z-index: 5;
+}
+
+.msg.sys {
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+    color: #ff0;
+    font-size: 14px;
+    border-top: 1px dotted #555;
+    border-bottom: 1px dotted #555;
+    padding: 4px 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.answer-stamp {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    padding: 2px 8px;
+    font-size: 16px;
+    font-weight: bold;
+    transform: rotate(-15deg);
+    font-family: 'Press Start 2P', cursive;
+    z-index: 10;
+    text-shadow: 2px 2px 0px #000;
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.5);
+}
+
+/* Stamp Variants */
+.stamp-yes {
+    background: #ff0055;
+    color: #fff;
+    border: 2px solid #fff;
+}
+
+.stamp-no {
+    background: transparent;
+    color: #ff0000;
+    border: 3px solid #ff0000;
+    text-shadow: none;
+    box-shadow: none;
+}
+
+.stamp-skip {
+    background: transparent;
+    color: #aaa;
+    border: 3px solid #aaa;
+    text-shadow: none;
+    box-shadow: none;
+}
+
+.stamp-critical {
+    background: #e0e0e0;
+    color: #000;
+    border: 2px solid #fff;
+    transform: rotate(-5deg);
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.question-area {
+    background: #000;
+    padding: 20px;
+    border-bottom: 4px double var(--main-green);
+    font-size: 18px;
+    line-height: 1.5;
+    color: #fff;
+    flex-shrink: 0;
+    /* Prevent shrinking */
+}
+
+.chat-area {
+    margin-bottom: 10px;
+    background: #000;
+    overflow-y: auto;
+    /* Enable scrolling */
+    flex-grow: 1;
+    /* Take remaining space */
+    padding: 10px;
+    /* Add padding inside scroll area */
+}
+
+.retro-input {
+    background: #fff;
+    border: 2px solid var(--main-green);
+    color: #000;
+    font-family: 'NeoDunggeunmo', monospace;
+    font-size: 18px;
+    padding: 10px;
+    outline: none;
+    box-shadow: inset 2px 2px 0px #ccc;
+}
