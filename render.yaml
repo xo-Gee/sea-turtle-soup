@@ -11,11 +11,15 @@ services:
       - key: CLIENT_URL
         value: https://sea-turtle-soup-client.onrender.com
 
-  - type: static
+  - type: site
     name: sea-turtle-soup-client
     env: static
     buildCommand: cd client && npm install && npm run build
     staticPublishPath: client/dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
     envVars:
       - key: VITE_SERVER_URL
         fromService:
