@@ -9,6 +9,7 @@ export default function GameRoom() {
     const [room, setRoom] = useState(null);
     const [messages, setMessages] = useState([]);
     const [inputMsg, setInputMsg] = useState('');
+    const [pendingGuesses, setPendingGuesses] = useState([]);
     const chatEndRef = useRef(null);
     const { showConfirm, showPrompt, showCustom, close } = useModal();
 
@@ -69,17 +70,12 @@ export default function GameRoom() {
 
     // Separate effect for Questioner specific events
     useEffect(() => {
-        const handleGuessSubmitted = async ({ guesserName, guess, guesserId }) => {
-            const confirmed = await showConfirm(`${guesserName}님의 정답 도전:\n"${guess}"\n\n정답입니까?`, "정답 판정");
-            if (confirmed) {
-                socket.emit('judge_guess', { guesserId, isCorrect: true });
-            } else {
-                socket.emit('judge_guess', { guesserId, isCorrect: false });
-            }
+        const handleGuessSubmitted = ({ guesserName, guess, guesserId }) => {
+            setPendingGuesses(prev => [...prev, { guesserName, guess, guesserId, id: Date.now() }]);
         };
         socket.on('guess_submitted', handleGuessSubmitted);
         return () => socket.off('guess_submitted', handleGuessSubmitted);
-    }, [showConfirm]);
+    }, []);
 
     useEffect(() => {
         chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -124,6 +120,38 @@ export default function GameRoom() {
         }
     };
 
+    const handleReviewGuesses = () => {
+        if (pendingGuesses.length === 0) return;
+
+        const currentGuess = pendingGuesses[0];
+        showCustom({
+            title: '정답 판정',
+            message: `${currentGuess.guesserName}님의 정답 도전:\n\n"${currentGuess.guess}"\n\n(남은 대기: ${pendingGuesses.length - 1}건)`,
+            children: (
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginTop: '15px' }}>
+                    <button className="retro-btn" style={{ background: 'var(--alert-red)', color: '#fff' }}
+                        onClick={() => {
+                            socket.emit('judge_guess', { guesserId: currentGuess.guesserId, isCorrect: true });
+                            setPendingGuesses(prev => prev.slice(1));
+                            close();
+                            // Re-open if more guesses exist? Maybe better to let user click again or auto-open next?
+                            // Let's let user click again for better control.
+                        }}>
+                        정답!
+                    </button>
+                    <button className="retro-btn" style={{ background: 'transparent', color: '#fff', border: '2px solid #fff' }}
+                        onClick={() => {
+                            socket.emit('judge_guess', { guesserId: currentGuess.guesserId, isCorrect: false });
+                            setPendingGuesses(prev => prev.slice(1));
+                            close();
+                        }}>
+                        오답
+                    </button>
+                </div>
+            )
+        });
+    };
+
     const [isHintMode, setIsHintMode] = useState(false);
 
     const sendMessage = () => {
@@ -157,7 +185,24 @@ export default function GameRoom() {
             <div className="question-area">
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span style={{ background: 'var(--alert-red)', color: 'white', padding: '2px 4px 0 4px', fontSize: '12px' }}>PROBLEM</span>
-                    {isQuestioner && <span style={{ fontSize: '12px', color: 'var(--main-green)' }}>남은 힌트: {room.hintsLeft ?? 2}</span>}
+                    {isQuestioner && (
+                        <div style={{ display: 'flex', gap: '10px' }}>
+                            <span style={{ fontSize: '12px', color: 'var(--main-green)' }}>남은 힌트: {room.hintsLeft ?? 2}</span>
+                            {pendingGuesses.length > 0 && (
+                                <button
+                                    className="retro-btn"
+                                    style={{
+                                        padding: '0 5px', fontSize: '12px',
+                                        background: 'var(--alert-red)', color: '#fff',
+                                        animation: 'blink 1s infinite'
+                                    }}
+                                    onClick={handleReviewGuesses}
+                                >
+                                    정답 확인 ({pendingGuesses.length})
+                                </button>
+                            )}
+                        </div>
+                    )}
                 </div>
                 <div style={{ marginTop: '5px', color: '#fff' }}>
                     {room.scenario?.content}
