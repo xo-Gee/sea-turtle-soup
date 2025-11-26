@@ -9,7 +9,7 @@ services:
       - key: PORT
         value: 10000
       - key: CLIENT_URL
-        value: https://sea-turtle-soup-client.onrender.com
+        value: https://seaturtlesoup-online.onrender.com
 
   - type: web
     name: seaturtlesoup-online
