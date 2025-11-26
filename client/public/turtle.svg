@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g transform="translate(50, 50)">
+    <!-- Legs -->
+    <ellipse cx="-25" cy="-20" rx="10" ry="15" fill="#4CAF50" transform="rotate(-45 -25 -20)"/>
+    <ellipse cx="25" cy="-20" rx="10" ry="15" fill="#4CAF50" transform="rotate(45 25 -20)"/>
+    <ellipse cx="-25" cy="25" rx="8" ry="12" fill="#4CAF50" transform="rotate(45 -25 25)"/>
+    <ellipse cx="25" cy="25" rx="8" ry="12" fill="#4CAF50" transform="rotate(-45 25 25)"/>
+    
+    <!-- Head -->
+    <circle cx="0" cy="-35" r="18" fill="#4CAF50"/>
+    <circle cx="-6" cy="-40" r="2" fill="black"/>
+    <circle cx="6" cy="-40" r="2" fill="black"/>
+    
+    <!-- Shell -->
+    <ellipse cx="0" cy="5" rx="30" ry="35" fill="#2E7D32"/>
+    <path d="M-15 5 L15 5 M0 -15 L0 25" stroke="#1B5E20" stroke-width="2"/>
+    <circle cx="0" cy="5" r="20" fill="none" stroke="#1B5E20" stroke-width="2"/>
+  </g>
+</svg>
