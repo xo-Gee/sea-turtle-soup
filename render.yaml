@@ -12,7 +12,7 @@ services:
         value: https://sea-turtle-soup-client.onrender.com
 
   - type: web
-    name: sea-turtle-soup
+    name: seaturtlesoup-online
     env: static
     buildCommand: cd client && npm install && npm run build
     staticPublishPath: client/dist
