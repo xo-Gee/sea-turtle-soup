@@ -11,7 +11,7 @@ services:
       - key: CLIENT_URL
         value: https://sea-turtle-soup-client.onrender.com
 
-  - type: site
+  - type: web
     name: sea-turtle-soup-client
     env: static
     buildCommand: cd client && npm install && npm run build
