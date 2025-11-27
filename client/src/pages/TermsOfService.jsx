@@ -1,32 +1,54 @@
 import { useNavigate } from 'react-router-dom';
-import { useLanguage } from '../context/LanguageContext';
 
 export default function TermsOfService() {
     const navigate = useNavigate();
-    const { t } = useLanguage();
 
     return (
         <div style={{ padding: '20px', color: 'var(--main-green)', height: '100%', overflowY: 'auto' }}>
-            <button className="retro-btn" onClick={() => navigate('/')} style={{ marginBottom: '20px' }}>
-                {t('common.back')}
+            <button className="retro-btn" onClick={() => navigate('/')} style={{ marginBottom: '20px', fontSize: '20px', padding: '5px 15px' }}>
+                ◀
             </button>
-            <h1>Terms of Service</h1>
-            <div className="win-box" style={{ padding: '20px', textAlign: 'left' }}>
-                <p>Last updated: November 27, 2025</p>
-                <p>Please read these terms and conditions carefully before using Our Service.</p>
-                <h2>Interpretation and Definitions</h2>
-                <h3>Interpretation</h3>
-                <p>The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.</p>
-                <h2>Acknowledgment</h2>
-                <p>These are the Terms and Conditions governing the use of this Service and the agreement that operates between You and the Company. These Terms and Conditions set out the rights and obligations of all users regarding the use of the Service.</p>
-                <p>Your access to and use of the Service is conditioned on Your acceptance of and compliance with these Terms and Conditions. These Terms and Conditions apply to all visitors, users and others who access or use the Service.</p>
-                <p>By accessing or using the Service You agree to be bound by these Terms and Conditions. If You disagree with any part of these Terms and Conditions then You may not access the Service.</p>
-                <h2>"AS IS" and "AS AVAILABLE" Disclaimer</h2>
-                <p>The Service is provided to You "AS IS" and "AS AVAILABLE" and with all faults and defects without warranty of any kind. To the maximum extent permitted under applicable law, the Company, on its own behalf and on behalf of its Affiliates and its and their respective licensors and service providers, expressly disclaims all warranties, whether express, implied, statutory or otherwise, with respect to the Service, including all implied warranties of merchantability, fitness for a particular purpose, title and non-infringement, and warranties that may arise out of course of dealing, course of performance, usage or trade practice.</p>
-                <h2>Contact Us</h2>
-                <p>If you have any questions about these Terms and Conditions, You can contact us:</p>
+            <h1>이용약관</h1>
+            <div className="win-box" style={{ padding: '20px', textAlign: 'left', lineHeight: '1.6' }}>
+                <p>최종 업데이트: 2025년 11월 27일</p>
+
+                <h2>제1조 (목적)</h2>
+                <p>본 약관은 Sea Turtle Soup(이하 "회사")이 제공하는 바다거북 스프 게임 및 관련 서비스(이하 "서비스")의 이용조건 및 절차, 회사와 이용자의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다.</p>
+
+                <h2>제2조 (정의)</h2>
+                <ol>
+                    <li>"서비스"란 회사가 제공하는 모든 게임 및 관련 콘텐츠를 의미합니다.</li>
+                    <li>"이용자"란 본 약관에 따라 회사가 제공하는 서비스를 받는 자를 의미합니다.</li>
+                </ol>
+
+                <h2>제3조 (이용자격)</h2>
+                <p>본 서비스는 만 14세 이상의 개인이 이용할 수 있습니다. 만 14세 미만의 아동은 법정대리인의 동의 하에 서비스를 이용할 수 있습니다.</p>
+
+                <h2>제4조 (약관의 효력 및 변경)</h2>
+                <p>회사는 필요한 경우 약관을 변경할 수 있으며, 중요한 변경사항은 사전에 공지합니다. 변경된 약관에 동의하지 않는 경우 서비스 이용을 중단할 수 있습니다.</p>
+
+                <h2>제5조 (서비스의 제공)</h2>
+                <p>회사는 웹 기반의 멀티플레이어 추리 게임 서비스를 제공합니다. 서비스는 "있는 그대로(AS IS)" 제공되며, 회사는 서비스의 품질이나 가용성을 보장하지 않습니다.</p>
+
+                <h2>제6조 (이용자의 의무)</h2>
+                <p>이용자는 타인의 정보를 도용하거나, 서비스의 정상적인 운영을 방해하거나, 불법적인 목적으로 서비스를 이용해서는 안 됩니다.</p>
+
+                <h2>제7조 (개인정보보호)</h2>
+                <p>회사는 이용자의 개인정보를 수집하지 않으며, 서비스 이용 과정에서 생성된 임시 데이터는 브라우저 종료 시 삭제됩니다.</p>
+
+                <h2>제8조 (서비스 이용의 제한)</h2>
+                <p>회사는 이용자가 본 약관을 위반한 경우 사전 통지 없이 서비스 이용을 제한할 수 있습니다.</p>
+
+                <h2>제9조 (면책조항)</h2>
+                <p>회사는 천재지변, 시스템 장애 등 불가항력적인 사유로 인한 서비스 중단이나 이용자가 서비스 이용을 통해 입은 손해에 대해 책임을 지지 않습니다.</p>
+
+                <h2>제10조 (준거법 및 분쟁해결)</h2>
+                <p>본 약관의 해석과 적용은 대한민국 법률에 따르며, 분쟁 발생 시 대한민국 법원을 관할법원으로 합니다.</p>
+
+                <h2>문의사항</h2>
+                <p>본 약관에 대한 문의사항이 있으시면 다음 연락처로 문의해 주세요:</p>
                 <ul>
-                    <li>By visiting this page on our website: https://github.com/xo-Gee/sea-turtle-soup</li>
+                    <li>이메일: rosevirus.k@gmail.com</li>
                 </ul>
             </div>
         </div>
