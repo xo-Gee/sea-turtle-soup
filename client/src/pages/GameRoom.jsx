@@ -214,6 +214,9 @@ export default function GameRoom() {
                         </div>
                     )}
                 </div>
+                <div style={{ marginTop: '10px', fontWeight: 'bold', color: 'var(--main-green)', fontSize: '1.1em' }}>
+                    {room.scenario?.title}
+                </div>
                 <div style={{ marginTop: '5px', color: '#fff' }}>
                     {room.scenario?.content}
                 </div>

@@ -83,6 +83,7 @@ export default function WaitingRoom() {
 
         const handleInputScenario = () => {
             // Custom Scenario Input
+            let title = '';
             let problem = '';
             let solution = '';
 
@@ -91,6 +92,12 @@ export default function WaitingRoom() {
                 message: '이번 게임에서 사용할 문제와 정답을 입력해주세요.',
                 children: (
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '10px' }}>
+                        <input
+                            type="text"
+                            className="retro-input"
+                            placeholder="제목 (예: 바다거북 수프)"
+                            onChange={(e) => title = e.target.value}
+                        />
                         <textarea
                             className="retro-input"
                             placeholder="문제 (상황 설명)"
@@ -106,8 +113,8 @@ export default function WaitingRoom() {
                         <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
                             <button className="retro-btn" style={{ flex: 1, background: 'var(--alert-red)', color: '#fff' }}
                                 onClick={() => {
-                                    if (!problem.trim() || !solution.trim()) return alert('문제와 정답을 모두 입력해주세요.');
-                                    socket.emit('submit_scenario', { customScenario: { title: 'Custom Scenario', content: problem, solution: solution } });
+                                    if (!title.trim() || !problem.trim() || !solution.trim()) return alert('제목, 문제, 정답을 모두 입력해주세요.');
+                                    socket.emit('submit_scenario', { customScenario: { title: title, content: problem, solution: solution } });
                                     close();
                                 }}
                             >
