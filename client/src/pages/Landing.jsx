@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { socket } from '../socket';
 import { useModal } from '../context/ModalContext';
 import { useLanguage } from '../context/LanguageContext';
+import HowToPlayModal from '../components/HowToPlayModal';
 
 
 export default function Landing() {
@@ -61,6 +62,15 @@ export default function Landing() {
         });
     };
 
+    const handleHowToPlayClick = () => {
+        showCustom({
+            title: 'HOW TO PLAY',
+            type: 'custom',
+            message: null,
+            children: <HowToPlayModal onClose={close} />
+        });
+    };
+
     const handleEnter = () => {
         if (!nickname.trim()) return showAlert(t('landing.enterNickname'));
 
@@ -100,6 +110,14 @@ export default function Landing() {
             <div className="win-box" style={{ width: '100%', boxSizing: 'border-box' }}>
                 <p style={{ margin: 0, textAlign: 'left' }}>{t('landing.systemLogin')}</p>
             </div>
+
+            <button
+                className="retro-btn"
+                style={{ width: '100%', marginBottom: '20px', background: '#000', border: '1px dashed var(--main-green)' }}
+                onClick={handleHowToPlayClick}
+            >
+                [ HOW TO PLAY ]
+            </button>
 
             <div className="input-group" style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%' }}>
                 <input
