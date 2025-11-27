@@ -212,6 +212,19 @@ export default function GameRoom() {
                     {isQuestioner && (
                         <div style={{ display: 'flex', gap: '10px' }}>
                             <span style={{ fontSize: '12px', color: 'var(--main-green)' }}>남은 힌트: {room.hintsLeft ?? 2}</span>
+                            {pendingGuesses.length > 0 && (
+                                <button
+                                    className="retro-btn"
+                                    style={{
+                                        padding: '0 5px', fontSize: '12px',
+                                        background: 'var(--alert-red)', color: '#fff',
+                                        animation: 'blink 1s infinite'
+                                    }}
+                                    onClick={handleReviewGuesses}
+                                >
+                                    정답 확인 ({pendingGuesses.length})
+                                </button>
+                            )}
                         </div>
                     )}
                 </div>
@@ -265,41 +278,21 @@ export default function GameRoom() {
                 <div ref={chatEndRef} />
             </div>
 
-            <div className="input-bar" style={{ display: 'flex', gap: '5px', alignItems: 'flex-end' }}>
+            <div className="input-bar" style={{ display: 'flex', gap: '5px' }}>
                 {isQuestioner && (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                        {pendingGuesses.length > 0 && (
-                            <button
-                                className="retro-btn"
-                                style={{
-                                    padding: '0 5px', fontSize: '10px', height: '20px',
-                                    background: 'var(--alert-red)', color: '#fff',
-                                    animation: 'blink 1s infinite',
-                                    whiteSpace: 'nowrap'
-                                }}
-                                onClick={handleReviewGuesses}
-                            >
-                                정답확인({pendingGuesses.length})
-                            </button>
-                        )}
-                        <button className="retro-btn"
-                            style={{
-                                padding: '0 5px', fontSize: '10px', height: '20px',
-                                background: isHintMode ? 'var(--main-green)' : '#333',
-                                color: isHintMode ? '#000' : '#888'
-                            }}
-                            onClick={() => {
-                                if (room.hintsLeft <= 0) return alert('힌트를 모두 사용했습니다.');
-                                setIsHintMode(!isHintMode);
-                            }}
-                            disabled={room.hintsLeft <= 0}
-                        >
-                            HINT
-                        </button>
-                    </div>
+                    <button className="retro-btn"
+                        style={{ padding: '0 10px', fontSize: '12px', background: isHintMode ? 'var(--main-green)' : '#333', color: isHintMode ? '#000' : '#888' }}
+                        onClick={() => {
+                            if (room.hintsLeft <= 0) return alert('힌트를 모두 사용했습니다.');
+                            setIsHintMode(!isHintMode);
+                        }}
+                        disabled={room.hintsLeft <= 0}
+                    >
+                        HINT
+                    </button>
                 )}
                 <input type="text" className="retro-input"
-                    style={{ flexGrow: 1, background: '#fff', color: '#000', fontSize: '16px', height: '42px' }}
+                    style={{ flexGrow: 1, background: '#fff', color: '#000', fontSize: '16px' }}
                     placeholder={isQuestioner ? (isHintMode ? "힌트를 입력하세요" : "답변은 질문을 클릭하세요") : "질문 입력..."}
                     value={inputMsg}
                     onChange={e => setInputMsg(e.target.value)}
@@ -309,7 +302,7 @@ export default function GameRoom() {
                     }}
                     disabled={isQuestioner && !isHintMode}
                 />
-                <button className="retro-btn" style={{ padding: '0 15px', height: '42px' }} onClick={sendMessage} disabled={isQuestioner && !isHintMode}>전송</button>
+                <button className="retro-btn" style={{ padding: '8px 15px 5px 15px' }} onClick={sendMessage} disabled={isQuestioner && !isHintMode}>전송</button>
             </div>
 
             {!isQuestioner && (
