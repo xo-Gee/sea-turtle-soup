@@ -49,6 +49,10 @@ module.exports = (io, socket) => {
             return socket.emit('error', { message: '방이 꽉 찼습니다.' });
         }
 
+        if (room.status !== 'WAITING') {
+            return socket.emit('error', { message: '게임이 이미 시작되었습니다.' });
+        }
+
         if (room.password && room.password !== password) {
             return socket.emit('error', { message: '비밀번호가 틀렸습니다.' });
         }

@@ -93,10 +93,10 @@ export default function Lobby() {
                             <span className={`status-badge ${room.status === 'WAITING' ? 'wait' : ''}`}
                                 style={{
                                     fontSize: '14px', padding: '4px 5px 2px 5px',
-                                    background: room.status === 'WAITING' ? 'blue' : 'var(--alert-red)',
+                                    background: room.status === 'WAITING' ? 'blue' : '#555',
                                     color: '#fff', lineHeight: 1
                                 }}>
-                                {room.players.length}/{room.maxPlayers}
+                                {room.status === 'WAITING' ? `${room.players.length}/${room.maxPlayers}` : 'PLAYING'}
                             </span>
                         </div>
                     ))
