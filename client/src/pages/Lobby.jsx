@@ -71,7 +71,7 @@ export default function Lobby() {
 
             <div className="win-box" style={{ textAlign: 'center', marginBottom: '20px' }}>
                 바다거북수프🐢
-                <div style={{ fontSize: '10px', color: '#666', marginTop: '5px' }}>v0.1.2</div>
+                <div style={{ fontSize: '10px', color: '#666', marginTop: '5px' }}>v0.1.3</div>
             </div>
 
             <div className="room-list" style={{ flexGrow: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '10px' }}>
