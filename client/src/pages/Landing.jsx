@@ -111,13 +111,7 @@ export default function Landing() {
                 <p style={{ margin: 0, textAlign: 'left' }}>{t('landing.systemLogin')}</p>
             </div>
 
-            <button
-                className="retro-btn"
-                style={{ width: '100%', marginBottom: '20px', background: '#000', border: '1px dashed var(--main-green)', color: 'var(--main-green)' }}
-                onClick={handleHowToPlayClick}
-            >
-                [ HOW TO PLAY ]
-            </button>
+
 
             <div className="input-group" style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%' }}>
                 <input
@@ -157,9 +151,26 @@ export default function Landing() {
                 color: '#666',
                 zIndex: 10
             }}>
-                <a href="/privacy" style={{ color: '#666', textDecoration: 'none' }}>Privacy Policy</a>
-                <a href="/terms" style={{ color: '#666', textDecoration: 'none' }}>Terms of Service</a>
-                <a href="/credits" style={{ color: '#666', textDecoration: 'none' }}>Credits</a>
+                <button
+                    className="retro-btn"
+                    style={{
+                        position: 'absolute',
+                        bottom: '30px',
+                        background: '#000',
+                        border: '1px dashed var(--main-green)',
+                        color: 'var(--main-green)',
+                        fontSize: '12px',
+                        padding: '5px 15px'
+                    }}
+                    onClick={handleHowToPlayClick}
+                >
+                    [ HOW TO PLAY ]
+                </button>
+                <div style={{ marginTop: '40px', display: 'flex', gap: '20px' }}>
+                    <a href="/privacy" style={{ color: '#666', textDecoration: 'none' }}>Privacy Policy</a>
+                    <a href="/terms" style={{ color: '#666', textDecoration: 'none' }}>Terms of Service</a>
+                    <a href="/credits" style={{ color: '#666', textDecoration: 'none' }}>Credits</a>
+                </div>
             </div>
         </div>
     );
