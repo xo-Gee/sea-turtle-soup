@@ -48,7 +48,7 @@ export default {
         enterScenarioInfo: '이번 게임에서 사용할 문제와 정답을 입력해주세요.',
         titlePlaceholder: '제목 (예: 바다거북 수프)',
         problemPlaceholder: '문제 (상황 설명)',
-        solutionPlaceholder: '정답 (진상)',
+        solutionPlaceholder: '정답',
         enterAllFields: '제목, 문제, 정답을 모두 입력해주세요.',
         startGame: '게임 시작',
         back: '< 뒤로가기',
@@ -92,7 +92,7 @@ export default {
     result: {
         gameOver: 'GAME OVER',
         winner: '정답자:',
-        truthRevealed: '[ 진상 공개 ]',
+        truthRevealed: '[ 정답 공개 ]',
         totalTime: '총 소요 시간:',
         totalQuestions: '총 질문 수:',
         minutes: '분',
