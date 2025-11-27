@@ -25,7 +25,7 @@ export default function Landing() {
     const handleLanguageClick = () => {
         showCustom({
             title: t('landing.languageSelect'),
-            message: t('landing.selectLanguageMsg'),
+            message: null,
             children: (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '15px' }}>
                     <button className="retro-btn" style={{ background: language === 'ko' ? 'var(--main-green)' : 'transparent', color: language === 'ko' ? '#000' : 'var(--main-green)' }}

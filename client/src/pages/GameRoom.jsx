@@ -208,7 +208,7 @@ export default function GameRoom() {
                             style={{ padding: '0 5px', fontSize: '10px', height: '20px', lineHeight: '20px' }}
                             onClick={() => setIsProblemOpen(!isProblemOpen)}
                         >
-                            {isProblemOpen ? t('gameRoom.collapse') : t('gameRoom.expand')}
+                            {isProblemOpen ? '▲' : '▼'}
                         </button>
                     </div>
                     {isQuestioner && (

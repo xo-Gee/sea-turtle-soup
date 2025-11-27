@@ -42,7 +42,7 @@ export default function Result() {
 
             <div className="win-box">
                 <div>{t('result.totalTime')} {Math.floor((Date.now() - room.startTime) / 1000 / 60)}{t('result.minutes')}</div>
-                <div>{t('result.totalQuestions')} {room.messages.filter(m => m.type === 'QUESTION').length}{t('result.count')}</div>
+                <div>{t('result.totalQuestions')} {room.messages.filter(m => m.type === 'QUESTION').length}</div>
             </div>
 
             <button className="retro-btn"
