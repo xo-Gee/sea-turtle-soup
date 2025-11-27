@@ -24,6 +24,8 @@ export default function GameRoom() {
             if (r) {
                 setRoom(r);
                 setMessages(r.messages || []);
+            } else {
+                navigate('/not-found');
             }
         };
         socket.on('room_list_update', handleRoomList);

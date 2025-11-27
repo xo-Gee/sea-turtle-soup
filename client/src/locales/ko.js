@@ -34,7 +34,7 @@ export default {
         endOfList: '... END OF LIST ...',
         createRoomTitle: '방 만들기',
         roomTitleLabel: '방 제목',
-        maxPlayersLabel: '인원 제한:',
+        maxPlayersLabel: '인원수:',
         people: '명',
         passwordLabel: '비밀번호 (선택)',
         create: '만들기',

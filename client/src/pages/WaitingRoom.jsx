@@ -41,7 +41,7 @@ export default function WaitingRoom() {
         };
 
         const handleError = (err) => {
-            if (err.message === '방을 찾을 수 없습니다.') {
+            if (err.message === '방을 찾을 수 없습니다.' || err.message === 'Room not found.') {
                 navigate('/not-found');
             } else {
                 showAlert(err.message, t('common.error'));
