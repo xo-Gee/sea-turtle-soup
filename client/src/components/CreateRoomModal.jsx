@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { socket } from '../socket';
 import { useModal } from '../context/ModalContext';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function CreateRoomModal({ onClose, nickname }) {
     const [title, setTitle] = useState('');
@@ -8,9 +9,10 @@ export default function CreateRoomModal({ onClose, nickname }) {
     const [password, setPassword] = useState('');
 
     const { showAlert } = useModal();
+    const { t } = useLanguage();
 
     const handleCreate = () => {
-        if (!title.trim()) return showAlert('방 제목을 입력하세요.');
+        if (!title.trim()) return showAlert(t('lobby.enterRoomTitle'));
         socket.emit('create_room', { title, maxPlayers, password, nickname });
         onClose();
     };
@@ -22,17 +24,17 @@ export default function CreateRoomModal({ onClose, nickname }) {
             display: 'flex', justifyContent: 'center', alignItems: 'center'
         }}>
             <div className="win-box" style={{ width: '80%', background: '#000' }}>
-                <h3 style={{ marginTop: 0, borderBottom: '1px solid var(--main-green)', paddingBottom: '10px' }}>방 만들기</h3>
+                <h3 style={{ marginTop: 0, borderBottom: '1px solid var(--main-green)', paddingBottom: '10px' }}>{t('lobby.createRoomTitle')}</h3>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
                     <div>
-                        <label>방 제목</label>
+                        <label>{t('lobby.roomTitleLabel')}</label>
                         <input type="text" className="retro-input" style={{ width: '100%', boxSizing: 'border-box' }}
                             value={title} onChange={e => setTitle(e.target.value)} />
                     </div>
 
                     <div>
-                        <label>인원 제한: {maxPlayers}명</label>
+                        <label>{t('lobby.maxPlayersLabel')} {maxPlayers}{t('lobby.people')}</label>
                         <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                             <button className="retro-btn" style={{ width: '40px' }}
                                 onClick={() => setMaxPlayers(Math.max(2, maxPlayers - 1))}>-</button>
@@ -43,17 +45,18 @@ export default function CreateRoomModal({ onClose, nickname }) {
                     </div>
 
                     <div>
-                        <label>비밀번호 (선택)</label>
+                        <label>{t('lobby.passwordLabel')}</label>
                         <input type="password" className="retro-input" style={{ width: '100%', boxSizing: 'border-box' }}
                             value={password} onChange={e => setPassword(e.target.value)} />
                     </div>
 
                     <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
-                        <button className="retro-btn" style={{ flexGrow: 1 }} onClick={onClose}>취소</button>
-                        <button className="retro-btn" style={{ flexGrow: 1, background: 'var(--alert-red)', color: '#fff' }} onClick={handleCreate}>만들기</button>
+                        <button className="retro-btn" style={{ flexGrow: 1 }} onClick={onClose}>{t('common.cancel')}</button>
+                        <button className="retro-btn" style={{ flexGrow: 1, background: 'var(--alert-red)', color: '#fff' }} onClick={handleCreate}>{t('lobby.create')}</button>
                     </div>
                 </div>
             </div>
         </div>
     );
 }
+

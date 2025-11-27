@@ -31,7 +31,14 @@ export default {
         privateRoom: 'Private Room',
         waiting: 'WAITING',
         playing: 'PLAYING',
-        endOfList: '... END OF LIST ...'
+        endOfList: '... END OF LIST ...',
+        createRoomTitle: 'Create Room',
+        roomTitleLabel: 'Room Title',
+        maxPlayersLabel: 'Max Players:',
+        people: '',
+        passwordLabel: 'Password (Optional)',
+        create: 'Create',
+        enterRoomTitle: 'Please enter a room title.'
     },
     waitingRoom: {
         roomNotFound: 'Room not found.',

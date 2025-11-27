@@ -13,7 +13,7 @@ export default {
     },
     landing: {
         nicknamePlaceholder: 'NICKNAME...',
-        enter: '入場する >',
+        enter: '入場 >',
         systemLogin: 'SYSTEM LOGIN_',
         welcome: '★★★ ようこそ。想像以上の世界を広げてください。 ★★★',
         languageSelect: 'LANGUAGE SELECT',
@@ -23,7 +23,7 @@ export default {
     lobby: {
         user: 'USER:',
         exit: '退出',
-        title: 'ウミガメのスープ🐢',
+        title: 'Sea Turtle Soup🐢',
         noRooms: '部屋がありません。',
         host: 'ホスト:',
         createRoom: '+ 部屋作成',
@@ -31,7 +31,14 @@ export default {
         privateRoom: '非公開部屋',
         waiting: '待機中',
         playing: '進行中',
-        endOfList: '... END OF LIST ...'
+        endOfList: '... END OF LIST ...',
+        createRoomTitle: '部屋作成',
+        roomTitleLabel: '部屋名',
+        maxPlayersLabel: '人数制限:',
+        people: '人',
+        passwordLabel: 'パスワード (任意)',
+        create: '作成',
+        enterRoomTitle: '部屋名を入力してください。'
     },
     waitingRoom: {
         roomNotFound: '部屋が見つかりません。',
@@ -44,7 +51,7 @@ export default {
         solutionPlaceholder: '正解 (真相)',
         enterAllFields: 'タイトル、問題、正解をすべて入力してください。',
         startGame: 'ゲーム開始',
-        back: '< 戻る',
+        back: '< 戻',
         room: 'Room:',
         questioner: '[ 出題者 ]',
         questionerVacant: '[ 出題者空席 ]',
@@ -53,7 +60,7 @@ export default {
         chatPlaceholder: 'チャット...',
         minPlayersWarning: '最低2人のプレイヤーが必要です。',
         ready: '準備完了!',
-        getReady: '準備する'
+        getReady: '準備'
     },
     gameRoom: {
         room: 'Room:',

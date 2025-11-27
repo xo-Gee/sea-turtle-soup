@@ -280,10 +280,10 @@ export default function GameRoom() {
                 <div ref={chatEndRef} />
             </div>
 
-            <div className="input-bar" style={{ display: 'flex', gap: '5px' }}>
+            <div className="input-bar" style={{ display: 'flex', gap: '5px', padding: '10px 0' }}>
                 {isQuestioner && (
                     <button className="retro-btn"
-                        style={{ padding: '0 10px', fontSize: '12px', background: isHintMode ? 'var(--main-green)' : '#333', color: isHintMode ? '#000' : '#888' }}
+                        style={{ padding: '0 8px', fontSize: '12px', background: isHintMode ? 'var(--main-green)' : '#333', color: isHintMode ? '#000' : '#888', whiteSpace: 'nowrap' }}
                         onClick={() => {
                             if (room.hintsLeft <= 0) return alert(t('gameRoom.noHints'));
                             setIsHintMode(!isHintMode);
@@ -294,7 +294,7 @@ export default function GameRoom() {
                     </button>
                 )}
                 <input type="text" className="retro-input"
-                    style={{ flexGrow: 1, background: '#fff', color: '#000', fontSize: '16px' }}
+                    style={{ flexGrow: 1, background: '#fff', color: '#000', fontSize: '16px', minWidth: 0 }}
                     placeholder={isQuestioner ? (isHintMode ? t('gameRoom.enterHint') : t('gameRoom.clickQuestionToAnswer')) : t('gameRoom.enterQuestion')}
                     value={inputMsg}
                     onChange={e => setInputMsg(e.target.value)}
@@ -304,7 +304,7 @@ export default function GameRoom() {
                     }}
                     disabled={isQuestioner && !isHintMode}
                 />
-                <button className="retro-btn" style={{ padding: '8px 15px 5px 15px' }} onClick={sendMessage} disabled={isQuestioner && !isHintMode}>{t('gameRoom.send')}</button>
+                <button className="retro-btn" style={{ padding: '8px 10px', whiteSpace: 'nowrap' }} onClick={sendMessage} disabled={isQuestioner && !isHintMode}>{t('gameRoom.send')}</button>
             </div>
 
             {!isQuestioner && (

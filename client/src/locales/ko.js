@@ -31,7 +31,14 @@ export default {
         privateRoom: '비공개 방',
         waiting: 'WAITING',
         playing: 'PLAYING',
-        endOfList: '... END OF LIST ...'
+        endOfList: '... END OF LIST ...',
+        createRoomTitle: '방 만들기',
+        roomTitleLabel: '방 제목',
+        maxPlayersLabel: '인원 제한:',
+        people: '명',
+        passwordLabel: '비밀번호 (선택)',
+        create: '만들기',
+        enterRoomTitle: '방 제목을 입력하세요.'
     },
     waitingRoom: {
         roomNotFound: '방을 찾을 수 없습니다.',

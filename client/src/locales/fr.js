@@ -23,7 +23,7 @@ export default {
     lobby: {
         user: 'USER:',
         exit: 'QUITTER',
-        title: 'Soupe de Tortue de Mer🐢',
+        title: 'Sea Turtle Soup🐢',
         noRooms: 'Aucune salle disponible.',
         host: 'Hôte:',
         createRoom: '+ Créer une salle',
@@ -31,7 +31,14 @@ export default {
         privateRoom: 'Salle Privée',
         waiting: 'EN ATTENTE',
         playing: 'EN JEU',
-        endOfList: '... FIN DE LA LISTE ...'
+        endOfList: '... FIN DE LA LISTA ...',
+        createRoomTitle: 'Créer une salle',
+        roomTitleLabel: 'Titre de la salle',
+        maxPlayersLabel: 'Joueurs Max:',
+        people: '',
+        passwordLabel: 'Mot de passe (Optionnel)',
+        create: 'Créer',
+        enterRoomTitle: 'Veuillez entrer un titre de salle.'
     },
     waitingRoom: {
         roomNotFound: 'Salle introuvable.',
