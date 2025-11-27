@@ -204,7 +204,7 @@ export default function WaitingRoom() {
             {/* Questioner Slot */}
             <div className="win-box"
                 style={{
-                    textAlign: 'center', padding: '20px', cursor: 'pointer',
+                    textAlign: 'center', padding: '10px', cursor: 'pointer',
                     background: questioner ? '#000' : '#111',
                     borderStyle: questioner ? 'solid' : 'dashed'
                 }}

@@ -107,8 +107,12 @@ export default function Landing() {
                     className="retro-input"
                     placeholder={t('landing.nicknamePlaceholder')}
                     value={nickname}
-                    maxLength={10}
-                    onChange={(e) => setNickname(e.target.value)}
+                    onChange={(e) => {
+                        const val = e.target.value;
+                        const hasKorean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(val);
+                        const limit = hasKorean ? 12 : 20;
+                        if (val.length <= limit) setNickname(val);
+                    }}
                     onKeyDown={(e) => e.key === 'Enter' && handleEnter()}
                 />
                 <button className="retro-btn" style={{ width: '100%', height: '50px' }} onClick={handleEnter}>

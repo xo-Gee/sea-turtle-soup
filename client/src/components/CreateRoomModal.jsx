@@ -30,7 +30,7 @@ export default function CreateRoomModal({ onClose, nickname }) {
                     <div>
                         <label>{t('lobby.roomTitleLabel')}</label>
                         <input type="text" className="retro-input" style={{ width: '100%', boxSizing: 'border-box' }}
-                            value={title} maxLength={14} onChange={e => setTitle(e.target.value)} />
+                            value={title} maxLength={20} onChange={e => setTitle(e.target.value)} />
                     </div>
 
                     <div>
