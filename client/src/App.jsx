@@ -8,6 +8,7 @@ import GameRoom from './pages/GameRoom';
 import Result from './pages/Result';
 import NotFound from './pages/NotFound';
 import { ModalProvider } from './context/ModalContext';
+import { LanguageProvider } from './context/LanguageContext';
 
 function App() {
   useEffect(() => {
@@ -19,22 +20,24 @@ function App() {
   }, []);
 
   return (
-    <ModalProvider>
-      <BrowserRouter>
-        <div className="mockup-frame">
-          <div className="crt-overlay"></div>
-          <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="/lobby" element={<Lobby />} />
-            <Route path="/room/:roomId" element={<WaitingRoom />} />
-            <Route path="/game/:roomId" element={<GameRoom />} />
-            <Route path="/result/:roomId" element={<Result />} />
-            <Route path="/not-found" element={<NotFound />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </div>
-      </BrowserRouter>
-    </ModalProvider>
+    <LanguageProvider>
+      <ModalProvider>
+        <BrowserRouter>
+          <div className="mockup-frame">
+            <div className="crt-overlay"></div>
+            <Routes>
+              <Route path="/" element={<Landing />} />
+              <Route path="/lobby" element={<Lobby />} />
+              <Route path="/room/:roomId" element={<WaitingRoom />} />
+              <Route path="/game/:roomId" element={<GameRoom />} />
+              <Route path="/result/:roomId" element={<Result />} />
+              <Route path="/not-found" element={<NotFound />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
+        </BrowserRouter>
+      </ModalProvider>
+    </LanguageProvider>
   );
 }
 

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { socket } from '../socket';
 import { useModal } from '../context/ModalContext';
+import { useLanguage } from '../context/LanguageContext';
 
 
 export default function Landing() {
@@ -9,7 +10,8 @@ export default function Landing() {
     const [visitorCount, setVisitorCount] = useState(0);
     const navigate = useNavigate();
 
-    const { showAlert } = useModal();
+    const { showAlert, showCustom, close } = useModal();
+    const { language, setLanguage } = useLanguage();
 
     useEffect(() => {
         socket.on('visitor_count', (count) => {
@@ -19,6 +21,29 @@ export default function Landing() {
             socket.off('visitor_count');
         };
     }, []);
+
+    const handleLanguageClick = () => {
+        showCustom({
+            title: 'LANGUAGE SELECT',
+            message: '언어를 선택해주세요 / Select Language / 言語を選択',
+            children: (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '15px' }}>
+                    <button className="retro-btn" style={{ background: language === 'ko' ? 'var(--main-green)' : 'transparent', color: language === 'ko' ? '#000' : 'var(--main-green)' }}
+                        onClick={() => { setLanguage('ko'); close(); }}>
+                        한국어 (Korean)
+                    </button>
+                    <button className="retro-btn" style={{ background: language === 'en' ? 'var(--main-green)' : 'transparent', color: language === 'en' ? '#000' : 'var(--main-green)' }}
+                        onClick={() => { setLanguage('en'); close(); }}>
+                        English
+                    </button>
+                    <button className="retro-btn" style={{ background: language === 'ja' ? 'var(--main-green)' : 'transparent', color: language === 'ja' ? '#000' : 'var(--main-green)' }}
+                        onClick={() => { setLanguage('ja'); close(); }}>
+                        日本語 (Japanese)
+                    </button>
+                </div>
+            )
+        });
+    };
 
     const handleEnter = () => {
         if (!nickname.trim()) return showAlert('닉네임을 입력해주세요.');
@@ -34,6 +59,14 @@ export default function Landing() {
         navigate('/lobby');
     };
 
+    const getWelcomeMessage = () => {
+        switch (language) {
+            case 'en': return '★★★ Welcome. Unleash your imagination beyond limits. ★★★';
+            case 'ja': return '★★★ ようこそ。想像以上の世界を広げてください。 ★★★';
+            default: return '★★★ 환영합니다. 당신이 생각한 상상 그 이상을 펼치세요. ★★★';
+        }
+    };
+
     return (
         <div id="screen-landing" style={{
             display: 'flex',
@@ -43,8 +76,17 @@ export default function Landing() {
             height: '100%',
             padding: '20px',
             textAlign: 'center',
-            background: 'radial-gradient(circle, #001100 0%, #000000 90%)'
+            background: 'radial-gradient(circle, #001100 0%, #000000 90%)',
+            position: 'relative'
         }}>
+            <button
+                className="retro-btn"
+                style={{ position: 'absolute', top: '20px', right: '20px', fontSize: '12px', padding: '5px 10px' }}
+                onClick={handleLanguageClick}
+            >
+                [ LANGUAGE ]
+            </button>
+
             <img src="/logo.png" alt="Sea Turtle Soup Logo" style={{ maxWidth: '100%', marginBottom: '30px' }} />
 
             <div className="win-box" style={{ width: '100%', boxSizing: 'border-box' }}>
@@ -70,7 +112,7 @@ export default function Landing() {
             </div> */}
 
             <div className="marquee-container">
-                <marquee scrolldelay="100">★★★ 환영합니다. 당신이 생각한 상상 그 이상을 펼치세요. ★★★</marquee>
+                <marquee scrolldelay="100">{getWelcomeMessage()}</marquee>
             </div>
         </div>
     );
