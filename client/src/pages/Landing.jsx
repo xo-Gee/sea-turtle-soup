@@ -48,6 +48,14 @@ export default function Landing() {
                         onClick={() => { setLanguage('fr'); close(); }}>
                         Français (French)
                     </button>
+                    <button className="retro-btn" style={{ background: language === 'zhCN' ? 'var(--main-green)' : 'transparent', color: language === 'zhCN' ? '#000' : 'var(--main-green)' }}
+                        onClick={() => { setLanguage('zhCN'); close(); }}>
+                        简体中文 (Simplified Chinese)
+                    </button>
+                    <button className="retro-btn" style={{ background: language === 'zhTW' ? 'var(--main-green)' : 'transparent', color: language === 'zhTW' ? '#000' : 'var(--main-green)' }}
+                        onClick={() => { setLanguage('zhTW'); close(); }}>
+                        繁體中文 (Traditional Chinese)
+                    </button>
                 </div>
             )
         });

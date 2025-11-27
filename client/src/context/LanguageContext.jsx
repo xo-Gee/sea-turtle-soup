@@ -4,10 +4,12 @@ import en from '../locales/en';
 import ja from '../locales/ja';
 import es from '../locales/es';
 import fr from '../locales/fr';
+import zhCN from '../locales/zhCN';
+import zhTW from '../locales/zhTW';
 
 const LanguageContext = createContext();
 
-const locales = { ko, en, ja, es, fr };
+const locales = { ko, en, ja, es, fr, zhCN, zhTW };
 
 export const useLanguage = () => useContext(LanguageContext);
 
