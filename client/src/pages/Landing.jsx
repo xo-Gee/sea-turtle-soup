@@ -40,6 +40,14 @@ export default function Landing() {
                         onClick={() => { setLanguage('ja'); close(); }}>
                         日本語 (Japanese)
                     </button>
+                    <button className="retro-btn" style={{ background: language === 'es' ? 'var(--main-green)' : 'transparent', color: language === 'es' ? '#000' : 'var(--main-green)' }}
+                        onClick={() => { setLanguage('es'); close(); }}>
+                        Español (Spanish)
+                    </button>
+                    <button className="retro-btn" style={{ background: language === 'fr' ? 'var(--main-green)' : 'transparent', color: language === 'fr' ? '#000' : 'var(--main-green)' }}
+                        onClick={() => { setLanguage('fr'); close(); }}>
+                        Français (French)
+                    </button>
                 </div>
             )
         });
@@ -63,6 +71,8 @@ export default function Landing() {
         switch (language) {
             case 'en': return '★★★ Welcome. Unleash your imagination beyond limits. ★★★';
             case 'ja': return '★★★ ようこそ。想像以上の世界を広げてください。 ★★★';
+            case 'es': return '★★★ Bienvenido. Desata tu imaginación más allá de los límites. ★★★';
+            case 'fr': return '★★★ Bienvenue. Libérez votre imagination au-delà des limites. ★★★';
             default: return '★★★ 환영합니다. 당신이 생각한 상상 그 이상을 펼치세요. ★★★';
         }
     };
