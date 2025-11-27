@@ -7,6 +7,9 @@ import WaitingRoom from './pages/WaitingRoom';
 import GameRoom from './pages/GameRoom';
 import Result from './pages/Result';
 import NotFound from './pages/NotFound';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
+import Credits from './pages/Credits';
 import { ModalProvider } from './context/ModalContext';
 import { LanguageProvider } from './context/LanguageContext';
 
@@ -32,6 +35,9 @@ function App() {
               <Route path="/game/:roomId" element={<GameRoom />} />
               <Route path="/result/:roomId" element={<Result />} />
               <Route path="/not-found" element={<NotFound />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/terms" element={<TermsOfService />} />
+              <Route path="/credits" element={<Credits />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>

@@ -127,6 +127,22 @@ export default function Landing() {
             <div className="marquee-container">
                 <marquee scrolldelay="100">{t('landing.welcome')}</marquee>
             </div>
+
+            <div style={{
+                position: 'absolute',
+                bottom: '10px',
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                gap: '20px',
+                fontSize: '10px',
+                color: '#666',
+                zIndex: 10
+            }}>
+                <a href="/privacy" style={{ color: '#666', textDecoration: 'none' }}>Privacy Policy</a>
+                <a href="/terms" style={{ color: '#666', textDecoration: 'none' }}>Terms of Service</a>
+                <a href="/credits" style={{ color: '#666', textDecoration: 'none' }}>Credits</a>
+            </div>
         </div>
     );
 }
