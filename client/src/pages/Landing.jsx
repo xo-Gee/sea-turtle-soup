@@ -30,7 +30,7 @@ export default function Landing() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '15px' }}>
                     <button className="retro-btn" style={{ background: language === 'ko' ? 'var(--main-green)' : 'transparent', color: language === 'ko' ? '#000' : 'var(--main-green)' }}
                         onClick={() => { setLanguage('ko'); close(); }}>
-                        한국어 (Korean)
+                        한국어
                     </button>
                     <button className="retro-btn" style={{ background: language === 'en' ? 'var(--main-green)' : 'transparent', color: language === 'en' ? '#000' : 'var(--main-green)' }}
                         onClick={() => { setLanguage('en'); close(); }}>
@@ -38,23 +38,23 @@ export default function Landing() {
                     </button>
                     <button className="retro-btn" style={{ background: language === 'ja' ? 'var(--main-green)' : 'transparent', color: language === 'ja' ? '#000' : 'var(--main-green)' }}
                         onClick={() => { setLanguage('ja'); close(); }}>
-                        日本語 (Japanese)
+                        日本語
                     </button>
                     <button className="retro-btn" style={{ background: language === 'es' ? 'var(--main-green)' : 'transparent', color: language === 'es' ? '#000' : 'var(--main-green)' }}
                         onClick={() => { setLanguage('es'); close(); }}>
-                        Español (Spanish)
+                        Español
                     </button>
                     <button className="retro-btn" style={{ background: language === 'fr' ? 'var(--main-green)' : 'transparent', color: language === 'fr' ? '#000' : 'var(--main-green)' }}
                         onClick={() => { setLanguage('fr'); close(); }}>
-                        Français (French)
+                        Français
                     </button>
                     <button className="retro-btn" style={{ background: language === 'zhCN' ? 'var(--main-green)' : 'transparent', color: language === 'zhCN' ? '#000' : 'var(--main-green)' }}
                         onClick={() => { setLanguage('zhCN'); close(); }}>
-                        简体中文 (Simplified Chinese)
+                        简体中文
                     </button>
                     <button className="retro-btn" style={{ background: language === 'zhTW' ? 'var(--main-green)' : 'transparent', color: language === 'zhTW' ? '#000' : 'var(--main-green)' }}
                         onClick={() => { setLanguage('zhTW'); close(); }}>
-                        繁體中文 (Traditional Chinese)
+                        繁體中文
                     </button>
                 </div>
             )
