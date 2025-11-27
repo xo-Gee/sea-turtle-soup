@@ -10,6 +10,13 @@ export default function Credits() {
             </button>
             <h1 style={{ marginTop: '50px' }}>Credits</h1>
             <div className="win-box" style={{ padding: '40px', display: 'inline-block', minWidth: '300px' }}>
+                <div style={{ marginBottom: '30px' }}>
+                    <h2 style={{ borderBottom: '1px dashed var(--main-green)', paddingBottom: '10px', marginBottom: '20px' }}>Developer</h2>
+                    <div style={{ fontSize: '1.2em', lineHeight: '2' }}>
+                        <p>Gonny</p>
+                    </div>
+                </div>
+
                 <h2 style={{ borderBottom: '1px dashed var(--main-green)', paddingBottom: '10px', marginBottom: '20px' }}>Special Thanks To</h2>
                 <div style={{ fontSize: '1.2em', lineHeight: '2' }}>
                     <p>김널븐</p>
