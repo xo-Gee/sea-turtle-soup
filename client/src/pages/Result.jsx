@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { socket } from '../socket';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Result() {
     const { roomId } = useParams();
     const navigate = useNavigate();
     const [room, setRoom] = useState(null);
+    const { t } = useLanguage();
 
     useEffect(() => {
         socket.emit('get_rooms');
@@ -25,13 +27,13 @@ export default function Result() {
             textAlign: 'center', justifyContent: 'center', gap: '20px'
         }}>
             <div className="win-box" style={{ borderColor: 'var(--alert-red)', background: '#000' }}>
-                <h1 style={{ color: 'var(--alert-red)', margin: '10px 0' }}>GAME OVER</h1>
-                <div style={{ fontSize: '14px', color: '#fff' }}>정답자: {room.winner}</div>
+                <h1 style={{ color: 'var(--alert-red)', margin: '10px 0' }}>{t('result.gameOver')}</h1>
+                <div style={{ fontSize: '14px', color: '#fff' }}>{t('result.winner')} {room.winner}</div>
             </div>
 
             <div className="win-box" style={{ textAlign: 'left', padding: '15px' }}>
                 <div style={{ color: 'var(--main-green)', marginBottom: '10px', borderBottom: '1px dashed #555' }}>
-                    [ 진상 공개 ]
+                    {t('result.truthRevealed')}
                 </div>
                 <div style={{ lineHeight: '1.6', color: '#fff' }}>
                     {room.scenario?.solution}
@@ -39,8 +41,8 @@ export default function Result() {
             </div>
 
             <div className="win-box">
-                <div>총 소요 시간: {Math.floor((Date.now() - room.startTime) / 1000 / 60)}분</div>
-                <div>총 질문 수: {room.messages.filter(m => m.type === 'QUESTION').length}개</div>
+                <div>{t('result.totalTime')} {Math.floor((Date.now() - room.startTime) / 1000 / 60)}{t('result.minutes')}</div>
+                <div>{t('result.totalQuestions')} {room.messages.filter(m => m.type === 'QUESTION').length}{t('result.count')}</div>
             </div>
 
             <button className="retro-btn"
@@ -50,7 +52,7 @@ export default function Result() {
                     navigate(`/room/${roomId}`);
                 }}
             >
-                대기실로 돌아가기
+                {t('result.returnToWaiting')}
             </button>
         </div>
     );

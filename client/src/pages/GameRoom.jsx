@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { socket } from '../socket';
 import { useModal } from '../context/ModalContext';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function GameRoom() {
     const { roomId } = useParams();
@@ -13,6 +14,7 @@ export default function GameRoom() {
     const [isProblemOpen, setIsProblemOpen] = useState(true); // Default open
     const chatEndRef = useRef(null);
     const { showConfirm, showPrompt, showCustom, close } = useModal();
+    const { t } = useLanguage();
 
     useEffect(() => {
         // Initial fetch
@@ -39,7 +41,7 @@ export default function GameRoom() {
 
         const handleGuessFailed = ({ guesserName }) => {
             setMessages(prev => [...prev, {
-                id: Date.now(), type: 'SYSTEM', message: `${guesserName}님의 정답 도전이 실패했습니다!`
+                id: Date.now(), type: 'SYSTEM', message: `${guesserName}${t('gameRoom.guessFailed')}`
             }]);
         };
 
@@ -103,25 +105,25 @@ export default function GameRoom() {
         if (targetMsg.type !== 'QUESTION') return;
 
         showCustom({
-            title: '답변 선택',
-            message: `"${targetMsg.message}"\n\n질문에 대한 답변을 선택하세요.`,
+            title: t('gameRoom.selectAnswer'),
+            message: `"${targetMsg.message}"\n\n${t('gameRoom.selectAnswerPrompt')}`,
             children: (
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginTop: '15px' }}>
                     <button className="retro-btn" style={{ background: 'var(--alert-red)', color: '#fff' }}
                         onClick={() => { socket.emit('answer_question', { questionId: targetMsg.id, answer: 'YES' }); close(); }}>
-                        YES
+                        {t('common.yes')}
                     </button>
                     <button className="retro-btn" style={{ background: 'transparent', color: 'red', border: '2px solid red' }}
                         onClick={() => { socket.emit('answer_question', { questionId: targetMsg.id, answer: 'NO' }); close(); }}>
-                        NO
+                        {t('common.no')}
                     </button>
                     <button className="retro-btn" style={{ background: 'transparent', color: 'var(--main-green)', border: '2px solid var(--main-green)' }}
                         onClick={() => { socket.emit('answer_question', { questionId: targetMsg.id, answer: 'CRITICAL' }); close(); }}>
-                        CRITICAL
+                        {t('common.critical')}
                     </button>
                     <button className="retro-btn" style={{ background: '#ccc', color: '#555' }}
                         onClick={() => { socket.emit('answer_question', { questionId: targetMsg.id, answer: 'SKIP' }); close(); }}>
-                        SKIP
+                        {t('common.skip')}
                     </button>
                 </div>
             )
@@ -129,7 +131,7 @@ export default function GameRoom() {
     };
 
     const handleGuess = async () => {
-        const guess = await showPrompt("정답을 서술하시오:", "정답 도전");
+        const guess = await showPrompt(t('gameRoom.describeAnswer'), t('gameRoom.guessChallenge'));
         if (guess) {
             socket.emit('submit_guess', { guess });
         }
@@ -140,8 +142,8 @@ export default function GameRoom() {
 
         const currentGuess = pendingGuesses[0];
         showCustom({
-            title: '정답 판정',
-            message: `${currentGuess.guesserName}님의 정답 도전:\n\n"${currentGuess.guess}"\n\n(남은 대기: ${pendingGuesses.length - 1}건)`,
+            title: t('gameRoom.judgeAnswer'),
+            message: `${currentGuess.guesserName}${t('gameRoom.guessAttempt')}\n\n"${currentGuess.guess}"\n\n(${t('gameRoom.pending')} ${pendingGuesses.length - 1})`,
             children: (
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginTop: '15px' }}>
                     <button className="retro-btn" style={{ background: 'var(--alert-red)', color: '#fff' }}
@@ -152,7 +154,7 @@ export default function GameRoom() {
                             // Re-open if more guesses exist? Maybe better to let user click again or auto-open next?
                             // Let's let user click again for better control.
                         }}>
-                        정답!
+                        {t('gameRoom.correct')}
                     </button>
                     <button className="retro-btn" style={{ background: 'transparent', color: '#fff', border: '2px solid #fff' }}
                         onClick={() => {
@@ -160,7 +162,7 @@ export default function GameRoom() {
                             setPendingGuesses(prev => prev.slice(1));
                             close();
                         }}>
-                        오답
+                        {t('gameRoom.incorrect')}
                     </button>
                 </div>
             )
@@ -193,25 +195,25 @@ export default function GameRoom() {
         <div id="screen-game" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
             {/* ... header ... */}
             <div className="game-header">
-                <span>Room: {room.title}</span>
+                <span>{t('gameRoom.room')} {room.title}</span>
                 <span onClick={() => { socket.emit('leave_room'); navigate('/lobby'); }} style={{ cursor: 'pointer' }}>[X]</span>
             </div>
 
             <div className="question-area" style={{ transition: 'all 0.3s ease' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                        <span style={{ background: 'var(--alert-red)', color: 'white', padding: '2px 4px 0 4px', fontSize: '12px' }}>PROBLEM</span>
+                        <span style={{ background: 'var(--alert-red)', color: 'white', padding: '2px 4px 0 4px', fontSize: '12px' }}>{t('gameRoom.problem')}</span>
                         <button
                             className="retro-btn"
                             style={{ padding: '0 5px', fontSize: '10px', height: '20px', lineHeight: '20px' }}
                             onClick={() => setIsProblemOpen(!isProblemOpen)}
                         >
-                            {isProblemOpen ? '▲ 접기' : '▼ 펼치기'}
+                            {isProblemOpen ? t('gameRoom.collapse') : t('gameRoom.expand')}
                         </button>
                     </div>
                     {isQuestioner && (
                         <div style={{ display: 'flex', gap: '10px' }}>
-                            <span style={{ fontSize: '12px', color: 'var(--main-green)' }}>남은 힌트: {room.hintsLeft ?? 2}</span>
+                            <span style={{ fontSize: '12px', color: 'var(--main-green)' }}>{t('gameRoom.hintsLeft')} {room.hintsLeft ?? 2}</span>
                             {pendingGuesses.length > 0 && (
                                 <button
                                     className="retro-btn"
@@ -222,7 +224,7 @@ export default function GameRoom() {
                                     }}
                                     onClick={handleReviewGuesses}
                                 >
-                                    정답 확인 ({pendingGuesses.length})
+                                    {t('gameRoom.checkAnswer')} ({pendingGuesses.length})
                                 </button>
                             )}
                         </div>
@@ -239,7 +241,7 @@ export default function GameRoom() {
                         </div>
                         {isQuestioner && (
                             <div style={{ marginTop: '10px', fontSize: '12px', color: '#888', borderTop: '1px dashed #555', paddingTop: '5px' }}>
-                                [정답] {room.scenario?.solution}
+                                {t('gameRoom.solutionLabel')} {room.scenario?.solution}
                             </div>
                         )}
                     </>
@@ -248,14 +250,14 @@ export default function GameRoom() {
 
             <div className="chat-area">
                 {/* ... messages ... */}
-                <div className="msg sys">--- 게임 시작 ---</div>
+                <div className="msg sys">{t('gameRoom.gameStart')}</div>
                 {messages.map((msg, i) => {
                     const isMe = msg.userId === myId;
                     const answerMsg = messages.find(m => m.type === 'ANSWER' && m.targetId === msg.id);
 
                     if (msg.type === 'ANSWER') return null;
                     if (msg.type === 'SYSTEM') return <div key={i} className="msg sys">{msg.message}</div>;
-                    if (msg.type === 'HINT') return <div key={i} className="msg sys" style={{ color: 'var(--main-green)', border: '1px dashed var(--main-green)' }}>[HINT] {msg.message}</div>;
+                    if (msg.type === 'HINT') return <div key={i} className="msg sys" style={{ color: 'var(--main-green)', border: '1px dashed var(--main-green)' }}>{t('gameRoom.hintLabel')} {msg.message}</div>;
 
                     return (
                         <div key={i}
@@ -283,7 +285,7 @@ export default function GameRoom() {
                     <button className="retro-btn"
                         style={{ padding: '0 10px', fontSize: '12px', background: isHintMode ? 'var(--main-green)' : '#333', color: isHintMode ? '#000' : '#888' }}
                         onClick={() => {
-                            if (room.hintsLeft <= 0) return alert('힌트를 모두 사용했습니다.');
+                            if (room.hintsLeft <= 0) return alert(t('gameRoom.noHints'));
                             setIsHintMode(!isHintMode);
                         }}
                         disabled={room.hintsLeft <= 0}
@@ -293,7 +295,7 @@ export default function GameRoom() {
                 )}
                 <input type="text" className="retro-input"
                     style={{ flexGrow: 1, background: '#fff', color: '#000', fontSize: '16px' }}
-                    placeholder={isQuestioner ? (isHintMode ? "힌트를 입력하세요" : "답변은 질문을 클릭하세요") : "질문 입력..."}
+                    placeholder={isQuestioner ? (isHintMode ? t('gameRoom.enterHint') : t('gameRoom.clickQuestionToAnswer')) : t('gameRoom.enterQuestion')}
                     value={inputMsg}
                     onChange={e => setInputMsg(e.target.value)}
                     onKeyDown={e => {
@@ -302,7 +304,7 @@ export default function GameRoom() {
                     }}
                     disabled={isQuestioner && !isHintMode}
                 />
-                <button className="retro-btn" style={{ padding: '8px 15px 5px 15px' }} onClick={sendMessage} disabled={isQuestioner && !isHintMode}>전송</button>
+                <button className="retro-btn" style={{ padding: '8px 15px 5px 15px' }} onClick={sendMessage} disabled={isQuestioner && !isHintMode}>{t('gameRoom.send')}</button>
             </div>
 
             {!isQuestioner && (
@@ -310,7 +312,7 @@ export default function GameRoom() {
                     style={{ width: '100%', background: 'var(--alert-red)', color: '#fff', borderColor: '#500' }}
                     onClick={handleGuess}
                 >
-                    !!! 정답 도전 !!!
+                    {t('gameRoom.guessButton')}
                 </button>
             )}
         </div>

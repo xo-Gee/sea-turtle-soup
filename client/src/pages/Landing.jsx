@@ -11,7 +11,7 @@ export default function Landing() {
     const navigate = useNavigate();
 
     const { showAlert, showCustom, close } = useModal();
-    const { language, setLanguage } = useLanguage();
+    const { language, setLanguage, t } = useLanguage();
 
     useEffect(() => {
         socket.on('visitor_count', (count) => {
@@ -24,8 +24,8 @@ export default function Landing() {
 
     const handleLanguageClick = () => {
         showCustom({
-            title: 'LANGUAGE SELECT',
-            message: '언어를 선택해주세요 / Select Language / 言語を選択',
+            title: t('landing.languageSelect'),
+            message: t('landing.selectLanguageMsg'),
             children: (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '15px' }}>
                     <button className="retro-btn" style={{ background: language === 'ko' ? 'var(--main-green)' : 'transparent', color: language === 'ko' ? '#000' : 'var(--main-green)' }}
@@ -54,7 +54,7 @@ export default function Landing() {
     };
 
     const handleEnter = () => {
-        if (!nickname.trim()) return showAlert('닉네임을 입력해주세요.');
+        if (!nickname.trim()) return showAlert(t('landing.enterNickname'));
 
         // Store nickname in session storage or just pass it via socket later
         // For now, we'll just navigate. Socket ID will be the user ID.
@@ -65,16 +65,6 @@ export default function Landing() {
         sessionStorage.setItem('nickname', nickname);
 
         navigate('/lobby');
-    };
-
-    const getWelcomeMessage = () => {
-        switch (language) {
-            case 'en': return '★★★ Welcome. Unleash your imagination beyond limits. ★★★';
-            case 'ja': return '★★★ ようこそ。想像以上の世界を広げてください。 ★★★';
-            case 'es': return '★★★ Bienvenido. Desata tu imaginación más allá de los límites. ★★★';
-            case 'fr': return '★★★ Bienvenue. Libérez votre imagination au-delà des limites. ★★★';
-            default: return '★★★ 환영합니다. 당신이 생각한 상상 그 이상을 펼치세요. ★★★';
-        }
     };
 
     return (
@@ -100,20 +90,20 @@ export default function Landing() {
             <img src="/logo.png" alt="Sea Turtle Soup Logo" style={{ maxWidth: '100%', marginBottom: '30px' }} />
 
             <div className="win-box" style={{ width: '100%', boxSizing: 'border-box' }}>
-                <p style={{ margin: 0, textAlign: 'left' }}>SYSTEM LOGIN_</p>
+                <p style={{ margin: 0, textAlign: 'left' }}>{t('landing.systemLogin')}</p>
             </div>
 
             <div className="input-group" style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%' }}>
                 <input
                     type="text"
                     className="retro-input"
-                    placeholder="NICKNAME..."
+                    placeholder={t('landing.nicknamePlaceholder')}
                     value={nickname}
                     onChange={(e) => setNickname(e.target.value)}
                     onKeyDown={(e) => e.key === 'Enter' && handleEnter()}
                 />
                 <button className="retro-btn" style={{ width: '100%', height: '50px' }} onClick={handleEnter}>
-                    입장하기 &gt;
+                    {t('landing.enter')}
                 </button>
             </div>
 
@@ -122,7 +112,7 @@ export default function Landing() {
             </div> */}
 
             <div className="marquee-container">
-                <marquee scrolldelay="100">{getWelcomeMessage()}</marquee>
+                <marquee scrolldelay="100">{t('landing.welcome')}</marquee>
             </div>
         </div>
     );

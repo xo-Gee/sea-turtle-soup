@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { socket } from '../socket';
 import CreateRoomModal from '../components/CreateRoomModal';
 import { useModal } from '../context/ModalContext';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Lobby() {
     const navigate = useNavigate();
@@ -11,6 +12,7 @@ export default function Lobby() {
     const nickname = sessionStorage.getItem('nickname');
 
     const { showAlert, showPrompt } = useModal();
+    const { t } = useLanguage();
 
     useEffect(() => {
         if (!nickname) {
@@ -34,7 +36,7 @@ export default function Lobby() {
         };
 
         const handleError = (err) => {
-            showAlert(err.message, '오류');
+            showAlert(err.message, t('common.error'));
         };
 
         socket.on('room_list_update', handleRoomListUpdate);
@@ -53,7 +55,7 @@ export default function Lobby() {
     const handleJoinRoom = async (roomId, isPrivate) => {
         let password = null;
         if (isPrivate) {
-            password = await showPrompt('비밀번호를 입력하세요:', '비공개 방');
+            password = await showPrompt(t('lobby.enterPassword'), t('lobby.privateRoom'));
             if (password === null) return; // Cancelled
         }
         socket.emit('join_room', { roomId, nickname, password });
@@ -65,18 +67,18 @@ export default function Lobby() {
                 display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                 marginBottom: '15px', borderBottom: '2px dashed var(--main-green)', paddingBottom: '10px'
             }}>
-                <span>USER: {nickname}</span>
-                <button className="retro-btn" style={{ fontSize: '14px' }} onClick={() => navigate('/')}>나가기</button>
+                <span>{t('lobby.user')} {nickname}</span>
+                <button className="retro-btn" style={{ fontSize: '14px' }} onClick={() => navigate('/')}>{t('lobby.exit')}</button>
             </div>
 
             <div className="win-box" style={{ textAlign: 'center', marginBottom: '20px' }}>
-                바다거북수프🐢
+                {t('lobby.title')}
                 <div style={{ fontSize: '10px', color: '#666', marginTop: '5px' }}>v0.1.4</div>
             </div>
 
             <div className="room-list" style={{ flexGrow: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 {rooms.length === 0 ? (
-                    <div style={{ textAlign: 'center', color: '#666', padding: '20px' }}>방이 없습니다.</div>
+                    <div style={{ textAlign: 'center', color: '#666', padding: '20px' }}>{t('lobby.noRooms')}</div>
                 ) : (
                     rooms.map(room => (
                         <div key={room.roomId} className="room-item"
@@ -88,7 +90,7 @@ export default function Lobby() {
                         >
                             <div>
                                 <div style={{ fontWeight: 'bold', color: '#fff' }}>{room.title} {room.password ? '🔒' : ''}</div>
-                                <div style={{ fontSize: '14px', color: '#888' }}>방장: {room.players.find(p => p.isHost)?.nickname}</div>
+                                <div style={{ fontSize: '14px', color: '#888' }}>{t('lobby.host')} {room.players.find(p => p.isHost)?.nickname}</div>
                             </div>
                             <span className={`status-badge ${room.status === 'WAITING' ? 'wait' : ''}`}
                                 style={{
@@ -96,14 +98,14 @@ export default function Lobby() {
                                     background: room.status === 'WAITING' ? 'blue' : '#555',
                                     color: '#fff', lineHeight: 1
                                 }}>
-                                {room.status === 'WAITING' ? `${room.players.length}/${room.maxPlayers}` : 'PLAYING'}
+                                {room.status === 'WAITING' ? `${room.players.length}/${room.maxPlayers}` : t('lobby.playing')}
                             </span>
                         </div>
                     ))
                 )}
 
                 <div className="room-item" style={{ borderStyle: 'dashed', justifyContent: 'center', color: '#555' }}>
-                    ... END OF LIST ...
+                    {t('lobby.endOfList')}
                 </div>
             </div>
 
@@ -111,7 +113,7 @@ export default function Lobby() {
                 style={{ marginTop: 'auto', background: 'var(--main-green)', color: '#000' }}
                 onClick={() => setShowModal(true)}
             >
-                + 방 만들기
+                {t('lobby.createRoom')}
             </button>
 
             {showModal && <CreateRoomModal onClose={() => setShowModal(false)} nickname={nickname} />}

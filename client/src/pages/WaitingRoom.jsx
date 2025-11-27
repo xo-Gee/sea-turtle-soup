@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { socket } from '../socket';
 import { useModal } from '../context/ModalContext';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function WaitingRoom() {
     const { roomId } = useParams();
@@ -10,6 +11,7 @@ export default function WaitingRoom() {
     const [chatMsg, setChatMsg] = useState('');
     const [chatLog, setChatLog] = useState([]);
     const { showAlert, showCustom, close } = useModal();
+    const { t } = useLanguage();
 
     useEffect(() => {
         // If no room data, we might need to fetch it or rely on socket events
@@ -42,7 +44,7 @@ export default function WaitingRoom() {
             if (err.message === '방을 찾을 수 없습니다.') {
                 navigate('/not-found');
             } else {
-                showAlert(err.message, '오류');
+                showAlert(err.message, t('common.error'));
             }
         };
 
@@ -88,37 +90,37 @@ export default function WaitingRoom() {
             let solution = '';
 
             const { close } = showCustom({
-                title: '문제 출제',
-                message: '이번 게임에서 사용할 문제와 정답을 입력해주세요.',
+                title: t('waitingRoom.createScenario'),
+                message: t('waitingRoom.enterScenarioInfo'),
                 children: (
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '10px' }}>
                         <input
                             type="text"
                             className="retro-input"
-                            placeholder="제목 (예: 바다거북 수프)"
+                            placeholder={t('waitingRoom.titlePlaceholder')}
                             onChange={(e) => title = e.target.value}
                         />
                         <textarea
                             className="retro-input"
-                            placeholder="문제 (상황 설명)"
+                            placeholder={t('waitingRoom.problemPlaceholder')}
                             style={{ height: '80px', resize: 'none' }}
                             onChange={(e) => problem = e.target.value}
                         />
                         <textarea
                             className="retro-input"
-                            placeholder="정답 (진상)"
+                            placeholder={t('waitingRoom.solutionPlaceholder')}
                             style={{ height: '80px', resize: 'none' }}
                             onChange={(e) => solution = e.target.value}
                         />
                         <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
                             <button className="retro-btn" style={{ flex: 1, background: 'var(--alert-red)', color: '#fff' }}
                                 onClick={() => {
-                                    if (!title.trim() || !problem.trim() || !solution.trim()) return alert('제목, 문제, 정답을 모두 입력해주세요.');
+                                    if (!title.trim() || !problem.trim() || !solution.trim()) return alert(t('waitingRoom.enterAllFields'));
                                     socket.emit('submit_scenario', { customScenario: { title: title, content: problem, solution: solution } });
                                     close();
                                 }}
                             >
-                                게임 시작
+                                {t('waitingRoom.startGame')}
                             </button>
                         </div>
                     </div>
@@ -127,7 +129,7 @@ export default function WaitingRoom() {
         };
 
         const handleWaitingScenario = () => {
-            showAlert('출제자가 문제를 입력 중입니다...\n잠시만 기다려주세요.', '대기 중');
+            showAlert(t('waitingRoom.questionerCreating'), t('waitingRoom.waiting'));
         };
 
         socket.on('player_joined', handlePlayerJoined);
@@ -195,8 +197,8 @@ export default function WaitingRoom() {
                 <button className="retro-btn" style={{ fontSize: '14px' }} onClick={() => {
                     socket.emit('leave_room');
                     navigate('/lobby');
-                }}>&lt; 뒤로가기</button>
-                <span>Room: {room.title}</span>
+                }}>{t('waitingRoom.back')}</button>
+                <span>{t('waitingRoom.room')} {room.title}</span>
             </div>
 
             {/* Questioner Slot */}
@@ -210,14 +212,14 @@ export default function WaitingRoom() {
             >
                 {questioner ? (
                     <div>
-                        <div style={{ color: 'var(--alert-red)', fontWeight: 'bold' }}>[ 출제자 ]</div>
+                        <div style={{ color: 'var(--alert-red)', fontWeight: 'bold' }}>{t('waitingRoom.questioner')}</div>
                         <div style={{ fontSize: '20px', marginTop: '10px' }}>{questioner.nickname}</div>
-                        {questioner.id === myId && <div style={{ fontSize: '12px', color: '#666' }}>(클릭하여 취소)</div>}
+                        {questioner.id === myId && <div style={{ fontSize: '12px', color: '#666' }}>{t('waitingRoom.clickToCancel')}</div>}
                     </div>
                 ) : (
                     <div style={{ color: '#666' }}>
-                        <div>[ 출제자 공석 ]</div>
-                        <div style={{ fontSize: '12px', marginTop: '5px' }}>클릭하여 지원하세요</div>
+                        <div>{t('waitingRoom.questionerVacant')}</div>
+                        <div style={{ fontSize: '12px', marginTop: '5px' }}>{t('waitingRoom.clickToApply')}</div>
                     </div>
                 )}
             </div>
@@ -255,7 +257,7 @@ export default function WaitingRoom() {
                         if (e.nativeEvent.isComposing) return;
                         if (e.key === 'Enter') sendChat();
                     }}
-                    placeholder="채팅..."
+                    placeholder={t('waitingRoom.chatPlaceholder')}
                 />
             </div>
 
@@ -266,18 +268,18 @@ export default function WaitingRoom() {
                         style={{ width: '100%', background: 'var(--alert-red)', color: '#fff', opacity: (questioner && room.players.every(p => p.isReady) && room.players.length >= 2) ? 1 : 0.5 }}
                         disabled={!questioner || !room.players.every(p => p.isReady) || room.players.length < 2}
                         onClick={() => {
-                            if (room.players.length < 2) return showAlert('최소 2명 이상의 플레이어가 필요합니다.');
+                            if (room.players.length < 2) return showAlert(t('waitingRoom.minPlayersWarning'));
                             socket.emit('request_start');
                         }}
                     >
-                        게임 시작
+                        {t('waitingRoom.startGame')}
                     </button>
                 ) : (
                     <button className="retro-btn"
                         style={{ width: '100%', background: me?.isReady ? 'var(--dim-green)' : 'var(--main-green)', color: '#000' }}
                         onClick={handleReady}
                     >
-                        {me?.isReady ? '준비 완료!' : '준비하기'}
+                        {me?.isReady ? t('waitingRoom.ready') : t('waitingRoom.getReady')}
                     </button>
                 )}
             </div>

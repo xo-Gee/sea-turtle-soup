@@ -1,6 +1,8 @@
 import React from 'react';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function RetroModal({ isOpen, type, title, message, onConfirm, onCancel, children }) {
+    const { t } = useLanguage();
     if (!isOpen) return null;
 
     return (
@@ -35,7 +37,7 @@ export default function RetroModal({ isOpen, type, title, message, onConfirm, on
                     }}>
                         {type !== 'alert' && (
                             <button className="retro-btn" style={{ flexGrow: 1 }} onClick={onCancel}>
-                                취소
+                                {t('common.cancel')}
                             </button>
                         )}
                         <button className="retro-btn"
@@ -46,7 +48,7 @@ export default function RetroModal({ isOpen, type, title, message, onConfirm, on
                             }}
                             onClick={onConfirm}
                         >
-                            확인
+                            {t('common.confirm')}
                         </button>
                     </div>
                 )}
@@ -54,3 +56,4 @@ export default function RetroModal({ isOpen, type, title, message, onConfirm, on
         </div>
     );
 }
+
