@@ -113,7 +113,7 @@ export default function Landing() {
 
             <button
                 className="retro-btn"
-                style={{ width: '100%', marginBottom: '20px', background: '#000', border: '1px dashed var(--main-green)' }}
+                style={{ width: '100%', marginBottom: '20px', background: '#000', border: '1px dashed var(--main-green)', color: 'var(--main-green)' }}
                 onClick={handleHowToPlayClick}
             >
                 [ HOW TO PLAY ]
