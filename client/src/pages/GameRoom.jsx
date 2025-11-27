@@ -54,17 +54,27 @@ export default function GameRoom() {
             setRoom(updatedRoom);
         };
 
+        const handleError = (err) => {
+            if (err.message === '방을 찾을 수 없습니다.') {
+                navigate('/not-found');
+            }
+        };
+
         socket.on('message_received', handleMessage);
         socket.on('game_over', handleGameOver);
         socket.on('guess_failed', handleGuessFailed);
         socket.on('player_update', handlePlayerUpdate);
+        socket.on('error', handleError);
 
         return () => {
             socket.off('room_list_update', handleRoomList);
             socket.off('message_received', handleMessage);
             socket.off('game_over', handleGameOver);
             socket.off('guess_failed', handleGuessFailed);
+            socket.off('game_over', handleGameOver);
+            socket.off('guess_failed', handleGuessFailed);
             socket.off('player_update', handlePlayerUpdate);
+            socket.off('error', handleError);
         };
     }, [roomId, navigate]);
 

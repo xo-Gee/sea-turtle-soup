@@ -38,6 +38,14 @@ export default function WaitingRoom() {
             });
         };
 
+        const handleError = (err) => {
+            if (err.message === '방을 찾을 수 없습니다.') {
+                navigate('/not-found');
+            } else {
+                showAlert(err.message, '오류');
+            }
+        };
+
         socket.on('player_joined', handlePlayerJoined);
         socket.on('player_left', handlePlayerLeft);
         socket.on('player_update', handlePlayerUpdate);
@@ -124,7 +132,9 @@ export default function WaitingRoom() {
         socket.on('player_left', handlePlayerLeft);
         socket.on('player_update', handlePlayerUpdate);
         socket.on('game_started', handleGameStarted);
+        socket.on('game_started', handleGameStarted);
         socket.on('message_received', handleMessage);
+        socket.on('error', handleError);
 
         socket.on('input_scenario', handleInputScenario);
         socket.on('waiting_scenario', handleWaitingScenario);
@@ -135,6 +145,7 @@ export default function WaitingRoom() {
             socket.off('player_update', handlePlayerUpdate);
             socket.off('game_started', handleGameStarted);
             socket.off('message_received', handleMessage);
+            socket.off('error', handleError);
             socket.off('room_data', handleRoomData);
             socket.off('input_scenario', handleInputScenario);
             socket.off('waiting_scenario', handleWaitingScenario);

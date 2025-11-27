@@ -6,6 +6,7 @@ import Lobby from './pages/Lobby';
 import WaitingRoom from './pages/WaitingRoom';
 import GameRoom from './pages/GameRoom';
 import Result from './pages/Result';
+import NotFound from './pages/NotFound';
 import { ModalProvider } from './context/ModalContext';
 
 function App() {
@@ -28,6 +29,8 @@ function App() {
             <Route path="/room/:roomId" element={<WaitingRoom />} />
             <Route path="/game/:roomId" element={<GameRoom />} />
             <Route path="/result/:roomId" element={<Result />} />
+            <Route path="/not-found" element={<NotFound />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </BrowserRouter>
