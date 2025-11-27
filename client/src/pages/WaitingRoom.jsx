@@ -197,7 +197,7 @@ export default function WaitingRoom() {
                 <button className="retro-btn" style={{ fontSize: '14px' }} onClick={() => {
                     socket.emit('leave_room');
                     navigate('/lobby');
-                }}>{t('waitingRoom.back')}</button>
+                }}>◀</button>
                 <span>{t('waitingRoom.room')} {room.title}</span>
             </div>
 

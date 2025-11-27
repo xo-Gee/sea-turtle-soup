@@ -107,6 +107,7 @@ export default function Landing() {
                     className="retro-input"
                     placeholder={t('landing.nicknamePlaceholder')}
                     value={nickname}
+                    maxLength={10}
                     onChange={(e) => setNickname(e.target.value)}
                     onKeyDown={(e) => e.key === 'Enter' && handleEnter()}
                 />
