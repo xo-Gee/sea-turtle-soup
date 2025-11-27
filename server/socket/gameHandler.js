@@ -213,7 +213,9 @@ module.exports = (io, socket) => {
             room.messages = []; // Clear chat log
             room.scenario = null;
             room.winner = null;
-            room.players.forEach(p => p.isReady = false); // Reset ready status
+            room.players.forEach(p => {
+                p.isReady = p.isHost; // Host is always ready, others reset
+            });
             io.to(room.roomId).emit('room_reset', room); // Notify all to go back?
             // Or just update state so when they join/fetch they get new state.
             io.to(room.roomId).emit('player_update', room); // Update player list (ready status)
