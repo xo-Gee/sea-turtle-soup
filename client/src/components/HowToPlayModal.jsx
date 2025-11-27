@@ -11,7 +11,7 @@ export default function HowToPlayModal({ onClose }) {
                     <p>출제자가 들려주는 알 수 없는 이야기를 듣고,<br />
                         <strong>'네', '아니오', '중요하지 않습니다'</strong>로<br />
                         대답할 수 있는 질문을 던져<br />
-                        숨겨진 정답을 찾아내는 추리 게임입니다.</p>
+                        숨겨진 진실을 찾아내는 추리 게임입니다.</p>
                 </div>
             )
         },
@@ -43,12 +43,12 @@ export default function HowToPlayModal({ onClose }) {
             )
         },
         {
-            title: "정답 발견",
+            title: "정답",
             content: (
                 <div style={{ textAlign: 'left' }}>
                     <p>모든 단서를 조합해 정답을 맞추면 승리합니다!</p>
                     <div className="win-box" style={{ padding: '10px', marginTop: '10px', background: '#111', fontSize: '0.9em' }}>
-                        "남자는 과거 조난당했을 때 동료의 인육을 바다거북 수프인 줄 알고 먹었고, 나중에 진짜 수프를 먹고 정답을 깨달아 자살한 것입니다."
+                        "남자는 과거 조난당했을 때 동료의 인육을 바다거북 수프인 줄 알고 먹었고, 나중에 진짜 수프를 먹고 진실을 깨달아 자살한 것입니다."
                     </div>
                 </div>
             )
