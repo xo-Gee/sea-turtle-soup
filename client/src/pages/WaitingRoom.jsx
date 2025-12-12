@@ -44,23 +44,7 @@ export default function WaitingRoom() {
             });
         };
 
-        useEffect(() => {
-            if (!showScrollButton) {
-                chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-            }
-        }, [chatLog, showScrollButton]);
 
-        const handleScroll = () => {
-            if (!chatContainerRef.current) return;
-            const { scrollTop, scrollHeight, clientHeight } = chatContainerRef.current;
-            const isNearBottom = scrollHeight - scrollTop - clientHeight < 100;
-            setShowScrollButton(!isNearBottom);
-        };
-
-        const scrollToBottom = () => {
-            chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-            setShowScrollButton(false);
-        };
 
         const handleError = (err) => {
             // RoomGuard handles 'Room not found', handle other errors here if needed
@@ -185,6 +169,24 @@ export default function WaitingRoom() {
             socket.off('waiting_scenario', handleWaitingScenario);
         };
     }, [roomId, navigate, showCustom, showAlert, close]);
+
+    useEffect(() => {
+        if (!showScrollButton) {
+            chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [chatLog, showScrollButton]);
+
+    const handleScroll = () => {
+        if (!chatContainerRef.current) return;
+        const { scrollTop, scrollHeight, clientHeight } = chatContainerRef.current;
+        const isNearBottom = scrollHeight - scrollTop - clientHeight < 100;
+        setShowScrollButton(!isNearBottom);
+    };
+
+    const scrollToBottom = () => {
+        chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+        setShowScrollButton(false);
+    };
 
     const myId = socket.id;
     const me = room?.players.find(p => p.id === myId);
