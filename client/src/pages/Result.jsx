@@ -13,7 +13,11 @@ export default function Result() {
         socket.emit('get_rooms');
         const handleRoomList = (rooms) => {
             const r = rooms.find(r => r.roomId === roomId);
-            if (r) setRoom(r);
+            if (r) {
+                setRoom(r);
+            } else {
+                navigate('/not-found');
+            }
         };
         socket.on('room_list_update', handleRoomList);
         return () => socket.off('room_list_update', handleRoomList);
