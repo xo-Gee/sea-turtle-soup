@@ -12,7 +12,9 @@ export default function GameRoom() {
     const [inputMsg, setInputMsg] = useState('');
     const [pendingGuesses, setPendingGuesses] = useState([]);
     const [isProblemOpen, setIsProblemOpen] = useState(true); // Default open
+    const [showScrollButton, setShowScrollButton] = useState(false);
     const chatEndRef = useRef(null);
+    const chatContainerRef = useRef(null);
     const { showConfirm, showPrompt, showCustom, close } = useModal();
     const { t } = useLanguage();
 
@@ -93,8 +95,22 @@ export default function GameRoom() {
     }, []);
 
     useEffect(() => {
+        if (!showScrollButton) {
+            chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [messages, showScrollButton]);
+
+    const handleScroll = () => {
+        if (!chatContainerRef.current) return;
+        const { scrollTop, scrollHeight, clientHeight } = chatContainerRef.current;
+        const isNearBottom = scrollHeight - scrollTop - clientHeight < 100;
+        setShowScrollButton(!isNearBottom);
+    };
+
+    const scrollToBottom = () => {
         chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, [messages]);
+        setShowScrollButton(false);
+    };
 
     const myId = socket.id;
     const me = room?.players.find(p => p.id === myId);
@@ -287,7 +303,7 @@ export default function GameRoom() {
                 </button>
             )}
 
-            <div className="chat-area">
+            <div className="chat-area" ref={chatContainerRef} onScroll={handleScroll} style={{ position: 'relative' }}>
                 {/* ... messages ... */}
                 <div className="msg sys">{t('gameRoom.gameStart')}</div>
                 {messages.map((msg, i) => {
@@ -317,6 +333,32 @@ export default function GameRoom() {
                     );
                 })}
                 <div ref={chatEndRef} />
+
+                {showScrollButton && (
+                    <button
+                        className="retro-btn"
+                        style={{
+                            position: 'sticky',
+                            bottom: '10px',
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                            width: '40px',
+                            height: '40px',
+                            borderRadius: '50%',
+                            padding: 0,
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            background: 'rgba(0, 0, 0, 0.7)',
+                            border: '1px solid var(--main-green)',
+                            color: 'var(--main-green)',
+                            zIndex: 100
+                        }}
+                        onClick={scrollToBottom}
+                    >
+                        ↓
+                    </button>
+                )}
             </div>
 
             <div className="input-bar" style={{ display: 'flex', gap: '5px', padding: '10px 0' }}>

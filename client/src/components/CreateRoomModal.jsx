@@ -6,8 +6,8 @@ import { useLanguage } from '../context/LanguageContext';
 export default function CreateRoomModal({ onClose, nickname }) {
     const [title, setTitle] = useState('');
     const [maxPlayers, setMaxPlayers] = useState(4);
-    const [maxHints, setMaxHints] = useState(3);
-    const [maxGuesses, setMaxGuesses] = useState(3);
+    const [maxHints, setMaxHints] = useState(2);
+    const [maxGuesses, setMaxGuesses] = useState(2);
     const [password, setPassword] = useState('');
 
     const { showAlert } = useModal();
