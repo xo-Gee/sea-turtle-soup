@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useOutletContext } from 'react-router-dom';
 import { socket } from '../socket';
 import { useModal } from '../context/ModalContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -7,7 +7,8 @@ import { useLanguage } from '../context/LanguageContext';
 export default function WaitingRoom() {
     const { roomId } = useParams();
     const navigate = useNavigate();
-    const [room, setRoom] = useState(null);
+    const { room: initialRoom } = useOutletContext();
+    const [room, setRoom] = useState(initialRoom);
     const [chatMsg, setChatMsg] = useState('');
     const [chatLog, setChatLog] = useState([]);
     const [showScrollButton, setShowScrollButton] = useState(false);
@@ -62,9 +63,8 @@ export default function WaitingRoom() {
         };
 
         const handleError = (err) => {
-            if (err.message === '방을 찾을 수 없습니다.' || err.message === 'Room not found.') {
-                navigate('/not-found');
-            } else {
+            // RoomGuard handles 'Room not found', handle other errors here if needed
+            if (err.message !== '방을 찾을 수 없습니다.' && err.message !== 'Room not found.') {
                 showAlert(err.message, t('common.error'));
             }
         };
@@ -101,8 +101,12 @@ export default function WaitingRoom() {
 
         socket.on('room_data', handleRoomData);
 
-        // Request specific room data
-        socket.emit('get_room', roomId);
+        socket.on('room_data', handleRoomData);
+
+        // Request specific room data - RoomGuard already fetched it, but we might want fresh data? 
+        // Actually RoomGuard's data is fresh enough for mounting.
+        // We can skip emitting 'get_room' here to avoid redundant traffic.
+        // socket.emit('get_room', roomId);
 
         const handleInputScenario = () => {
             // Custom Scenario Input

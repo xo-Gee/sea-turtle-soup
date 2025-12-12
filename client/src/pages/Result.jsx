@@ -1,29 +1,19 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useOutletContext } from 'react-router-dom';
 import { socket } from '../socket';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function Result() {
     const { roomId } = useParams();
     const navigate = useNavigate();
-    const [room, setRoom] = useState(null);
+    const { room } = useOutletContext();
     const { t } = useLanguage();
 
-    useEffect(() => {
-        socket.emit('get_rooms');
-        const handleRoomList = (rooms) => {
-            const r = rooms.find(r => r.roomId === roomId);
-            if (r) {
-                setRoom(r);
-            } else {
-                navigate('/not-found');
-            }
-        };
-        socket.on('room_list_update', handleRoomList);
-        return () => socket.off('room_list_update', handleRoomList);
-    }, [roomId]);
+    // RoomGuard ensures 'room' is present. If it wasn't, we'd be in 404.
+    // However, if we need to listen for updates (unlikely for result page unless restart), we can add listeners.
+    // For Result page, static data from RoomGuard is usually enough.
 
-    if (!room) return <div style={{ color: 'white' }}>Loading...</div>;
+    // useEffect(() => { ... remove old logic ... }, []);
 
     return (
         <div id="screen-result" style={{

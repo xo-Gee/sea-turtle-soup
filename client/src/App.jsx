@@ -10,6 +10,7 @@ import NotFound from './pages/NotFound';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import Credits from './pages/Credits';
+import RoomGuard from './components/RoomGuard';
 import { ModalProvider } from './context/ModalContext';
 import { LanguageProvider } from './context/LanguageContext';
 
@@ -31,9 +32,12 @@ function App() {
             <Routes>
               <Route path="/" element={<Landing />} />
               <Route path="/lobby" element={<Lobby />} />
-              <Route path="/room/:roomId" element={<WaitingRoom />} />
-              <Route path="/game/:roomId" element={<GameRoom />} />
-              <Route path="/result/:roomId" element={<Result />} />
+              <Route path="/lobby" element={<Lobby />} />
+              <Route element={<RoomGuard />}>
+                <Route path="/room/:roomId" element={<WaitingRoom />} />
+                <Route path="/game/:roomId" element={<GameRoom />} />
+                <Route path="/result/:roomId" element={<Result />} />
+              </Route>
               <Route path="/not-found" element={<NotFound />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/terms" element={<TermsOfService />} />

@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useOutletContext } from 'react-router-dom';
 import { socket } from '../socket';
 import { useModal } from '../context/ModalContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -7,8 +7,9 @@ import { useLanguage } from '../context/LanguageContext';
 export default function GameRoom() {
     const { roomId } = useParams();
     const navigate = useNavigate();
-    const [room, setRoom] = useState(null);
-    const [messages, setMessages] = useState([]);
+    const { room: initialRoom } = useOutletContext();
+    const [room, setRoom] = useState(initialRoom);
+    const [messages, setMessages] = useState(initialRoom?.messages || []);
     const [inputMsg, setInputMsg] = useState('');
     const [pendingGuesses, setPendingGuesses] = useState([]);
     const [isProblemOpen, setIsProblemOpen] = useState(true); // Default open
@@ -19,18 +20,9 @@ export default function GameRoom() {
     const { t } = useLanguage();
 
     useEffect(() => {
-        // Initial fetch
-        socket.emit('get_rooms');
-        const handleRoomList = (rooms) => {
-            const r = rooms.find(r => r.roomId === roomId);
-            if (r) {
-                setRoom(r);
-                setMessages(r.messages || []);
-            } else {
-                navigate('/not-found');
-            }
-        };
-        socket.on('room_list_update', handleRoomList);
+        // Initial fetch handled by RoomGuard (context)
+        // We only need to listen for updates specific to this room/game
+
 
         const handleMessage = (msg) => {
             setMessages(prev => {
@@ -62,8 +54,8 @@ export default function GameRoom() {
         };
 
         const handleError = (err) => {
-            if (err.message === '방을 찾을 수 없습니다.') {
-                navigate('/not-found');
+            if (err.message !== '방을 찾을 수 없습니다.') {
+                // Generic error handling
             }
         };
 
@@ -71,6 +63,7 @@ export default function GameRoom() {
         socket.on('game_over', handleGameOver);
         socket.on('guess_failed', handleGuessFailed);
         socket.on('player_update', handlePlayerUpdate);
+        socket.on('game_started', handleGameStarted);
         socket.on('error', handleError);
 
         return () => {
