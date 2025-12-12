@@ -72,13 +72,11 @@ export default function GameRoom() {
         socket.on('error', handleError);
 
         return () => {
-            socket.off('room_list_update', handleRoomList);
             socket.off('message_received', handleMessage);
             socket.off('game_over', handleGameOver);
             socket.off('guess_failed', handleGuessFailed);
-            socket.off('game_over', handleGameOver);
-            socket.off('guess_failed', handleGuessFailed);
             socket.off('player_update', handlePlayerUpdate);
+            socket.off('game_started', handleGameStarted);
             socket.off('error', handleError);
         };
     }, [roomId, navigate]);
