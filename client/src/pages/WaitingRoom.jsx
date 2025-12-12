@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { socket } from '../socket';
 import { useModal } from '../context/ModalContext';
@@ -10,6 +10,9 @@ export default function WaitingRoom() {
     const [room, setRoom] = useState(null);
     const [chatMsg, setChatMsg] = useState('');
     const [chatLog, setChatLog] = useState([]);
+    const [showScrollButton, setShowScrollButton] = useState(false);
+    const chatEndRef = useRef(null);
+    const chatContainerRef = useRef(null);
     const { showAlert, showCustom, close } = useModal();
     const { t } = useLanguage();
 
@@ -38,6 +41,24 @@ export default function WaitingRoom() {
                 if (prev.some(m => m.id === msg.id)) return prev;
                 return [...prev, msg];
             });
+        };
+
+        useEffect(() => {
+            if (!showScrollButton) {
+                chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+            }
+        }, [chatLog, showScrollButton]);
+
+        const handleScroll = () => {
+            if (!chatContainerRef.current) return;
+            const { scrollTop, scrollHeight, clientHeight } = chatContainerRef.current;
+            const isNearBottom = scrollHeight - scrollTop - clientHeight < 100;
+            setShowScrollButton(!isNearBottom);
+        };
+
+        const scrollToBottom = () => {
+            chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+            setShowScrollButton(false);
         };
 
         const handleError = (err) => {
@@ -243,12 +264,39 @@ export default function WaitingRoom() {
             </div>
 
             {/* Chat Area */}
-            <div className="chat-area" style={{ flexGrow: 1, marginBottom: '10px', border: '1px solid #333' }}>
+            <div className="chat-area" ref={chatContainerRef} onScroll={handleScroll} style={{ flexGrow: 1, marginBottom: '10px', border: '1px solid #333', position: 'relative' }}>
                 {chatLog.map((msg, i) => (
                     <div key={i} style={{ fontSize: '14px', marginBottom: '5px' }}>
                         <span style={{ color: '#888' }}>{msg.nickname}:</span> {msg.message}
                     </div>
                 ))}
+                <div ref={chatEndRef} />
+
+                {showScrollButton && (
+                    <button
+                        className="retro-btn"
+                        style={{
+                            position: 'sticky',
+                            bottom: '10px',
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                            width: '40px',
+                            height: '40px',
+                            borderRadius: '50%',
+                            padding: 0,
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            background: 'rgba(0, 0, 0, 0.7)',
+                            border: '1px solid var(--main-green)',
+                            color: 'var(--main-green)',
+                            zIndex: 100
+                        }}
+                        onClick={scrollToBottom}
+                    >
+                        ↓
+                    </button>
+                )}
             </div>
             <div className="input-bar" style={{ padding: 0, background: 'transparent', border: 'none' }}>
                 <input type="text" className="retro-input" style={{ flexGrow: 1, fontSize: '14px' }}
