@@ -1,7 +1,7 @@
 const { rooms } = require('../state');
 
 module.exports = (io, socket) => {
-    const createRoom = ({ title, maxPlayers, password, nickname }) => {
+    const createRoom = ({ title, maxPlayers, password, nickname, maxHints, maxGuesses }) => {
         try {
             if (!title) return socket.emit('error', { message: '방 제목이 필요합니다.' });
             if (!nickname) return socket.emit('error', { message: '닉네임이 필요합니다.' });
@@ -11,6 +11,8 @@ module.exports = (io, socket) => {
                 roomId,
                 title,
                 maxPlayers: Number(maxPlayers), // Ensure number
+                maxHints: Number(maxHints) || 3,
+                maxGuesses: Number(maxGuesses) || 3,
                 password,
                 hostId: socket.id,
                 players: [{
@@ -71,6 +73,15 @@ module.exports = (io, socket) => {
         // Notify room members
         io.to(roomId).emit('player_joined', room);
 
+        // System message for join
+        const joinMsg = {
+            id: Date.now(),
+            type: 'SYSTEM',
+            message: `${nickname}님이 입장하셨습니다.`
+        };
+        room.messages.push(joinMsg);
+        io.to(roomId).emit('message_received', joinMsg);
+
         // Notify joiner
         socket.emit('joined_room', room);
 
@@ -83,8 +94,18 @@ module.exports = (io, socket) => {
         for (const [roomId, room] of rooms.entries()) {
             const playerIndex = room.players.findIndex(p => p.id === socket.id);
             if (playerIndex !== -1) {
+                const leavingPlayer = room.players[playerIndex];
                 room.players.splice(playerIndex, 1);
                 socket.leave(roomId);
+
+                // System message for leave
+                const leaveMsg = {
+                    id: Date.now(),
+                    type: 'SYSTEM',
+                    message: `${leavingPlayer.nickname}님이 퇴장하셨습니다.`
+                };
+                room.messages.push(leaveMsg);
+                io.to(roomId).emit('message_received', leaveMsg);
 
                 if (room.players.length === 0) {
                     rooms.delete(roomId);

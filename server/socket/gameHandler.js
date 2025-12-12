@@ -93,7 +93,14 @@ module.exports = (io, socket) => {
         room.scenario = scenario;
         room.startTime = Date.now();
         room.history = [];
-        room.hintsLeft = 2; // Initialize hints
+        room.hintsLeft = room.maxHints; // Initialize hints from settings
+        // room.guessesLeft = room.maxGuesses; // REMOVED: Global limit
+
+        // Initialize per-player guesses
+        room.players.forEach(p => {
+            p.guessesLeft = room.maxGuesses;
+        });
+
         room.pendingStart = false; // Clear flag
 
         io.to(room.roomId).emit('game_started', room);
@@ -162,6 +169,11 @@ module.exports = (io, socket) => {
 
         const player = room.players.find(p => p.id === socket.id);
 
+        // Check if player has guesses left
+        if (player.guessesLeft <= 0) {
+            return socket.emit('error', { message: '정답 도전 기회를 모두 사용했습니다.' });
+        }
+
         // Notify Questioner
         const questioner = room.players.find(p => p.role === 'QUESTIONER');
         if (questioner) {
@@ -183,12 +195,21 @@ module.exports = (io, socket) => {
         if (isCorrect) {
             room.status = 'FINISHED';
             room.winner = room.players.find(p => p.id === guesserId)?.nickname;
+            room.winner = room.players.find(p => p.id === guesserId)?.nickname;
             io.to(room.roomId).emit('game_over', room);
         } else {
-            // Notify failure
+            // Decrement guessesLeft for the guesser
+            const guesser = room.players.find(p => p.id === guesserId);
+            if (guesser && guesser.guessesLeft > 0) {
+                guesser.guessesLeft -= 1;
+            }
+
+            // Notify failure and update room state
             io.to(room.roomId).emit('guess_failed', {
-                guesserName: room.players.find(p => p.id === guesserId)?.nickname
+                guesserName: guesser?.nickname,
+                guessesLeft: guesser?.guessesLeft
             });
+            io.to(room.roomId).emit('player_update', room); // Sync room state
         }
     };
 
@@ -222,6 +243,19 @@ module.exports = (io, socket) => {
         }
     };
 
+    const endGame = () => {
+        const room = getRoom();
+        if (!room) return;
+
+        // Only Questioner can end game manually (when guesses are exhausted)
+        const player = room.players.find(p => p.id === socket.id);
+        if (player.role !== 'QUESTIONER') return;
+
+        room.status = 'FINISHED';
+        room.winner = null; // No winner if manually ended (or could be 'None')
+        io.to(room.roomId).emit('game_over', room);
+    };
+
     // Remove existing listeners to prevent duplication if handler is re-registered (though unlikely with new socket)
     socket.removeAllListeners('set_role');
     socket.removeAllListeners('set_ready');
@@ -231,6 +265,7 @@ module.exports = (io, socket) => {
     socket.removeAllListeners('answer_question');
     socket.removeAllListeners('submit_guess');
     socket.removeAllListeners('judge_guess');
+    socket.removeAllListeners('end_game');
     socket.removeAllListeners('reset_room');
 
     socket.on('set_role', setRole);
@@ -242,5 +277,6 @@ module.exports = (io, socket) => {
     socket.on('answer_question', answerQuestion);
     socket.on('submit_guess', submitGuess);
     socket.on('judge_guess', judgeGuess);
+    socket.on('end_game', endGame);
     socket.on('reset_room', resetRoom);
 };

@@ -6,6 +6,8 @@ import { useLanguage } from '../context/LanguageContext';
 export default function CreateRoomModal({ onClose, nickname }) {
     const [title, setTitle] = useState('');
     const [maxPlayers, setMaxPlayers] = useState(4);
+    const [maxHints, setMaxHints] = useState(3);
+    const [maxGuesses, setMaxGuesses] = useState(3);
     const [password, setPassword] = useState('');
 
     const { showAlert } = useModal();
@@ -13,7 +15,7 @@ export default function CreateRoomModal({ onClose, nickname }) {
 
     const handleCreate = () => {
         if (!title.trim()) return showAlert(t('lobby.enterRoomTitle'));
-        socket.emit('create_room', { title, maxPlayers, password, nickname });
+        socket.emit('create_room', { title, maxPlayers, password, nickname, maxHints, maxGuesses });
         onClose();
     };
 
@@ -41,6 +43,29 @@ export default function CreateRoomModal({ onClose, nickname }) {
                             <div className="retro-input" style={{ flexGrow: 1, textAlign: 'center' }}>{maxPlayers}</div>
                             <button className="retro-btn" style={{ width: '40px' }}
                                 onClick={() => setMaxPlayers(Math.min(10, maxPlayers + 1))}>+</button>
+                        </div>
+                    </div>
+
+                    <div style={{ display: 'flex', gap: '10px' }}>
+                        <div style={{ flex: 1 }}>
+                            <label>힌트 갯수: {maxHints}</label>
+                            <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                                <button className="retro-btn" style={{ width: '30px' }}
+                                    onClick={() => setMaxHints(Math.max(0, maxHints - 1))}>-</button>
+                                <div className="retro-input" style={{ flexGrow: 1, textAlign: 'center' }}>{maxHints}</div>
+                                <button className="retro-btn" style={{ width: '30px' }}
+                                    onClick={() => setMaxHints(Math.min(5, maxHints + 1))}>+</button>
+                            </div>
+                        </div>
+                        <div style={{ flex: 1 }}>
+                            <label>정답 도전: {maxGuesses}</label>
+                            <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                                <button className="retro-btn" style={{ width: '30px' }}
+                                    onClick={() => setMaxGuesses(Math.max(1, maxGuesses - 1))}>-</button>
+                                <div className="retro-input" style={{ flexGrow: 1, textAlign: 'center' }}>{maxGuesses}</div>
+                                <button className="retro-btn" style={{ width: '30px' }}
+                                    onClick={() => setMaxGuesses(Math.min(5, maxGuesses + 1))}>+</button>
+                            </div>
                         </div>
                     </div>
 

@@ -100,6 +100,10 @@ export default function GameRoom() {
     const me = room?.players.find(p => p.id === myId);
     const isQuestioner = me?.role === 'QUESTIONER';
 
+    // Check if all answerers have 0 guesses left
+    const answerers = room?.players.filter(p => p.role === 'ANSWERER') || [];
+    const allGuessesExhausted = answerers.length > 0 && answerers.every(p => p.guessesLeft <= 0);
+
 
 
     const handleAnswer = (targetMsg) => {
@@ -215,20 +219,8 @@ export default function GameRoom() {
                     </div>
                     {isQuestioner && (
                         <div style={{ display: 'flex', gap: '10px' }}>
-                            <span style={{ fontSize: '12px', color: 'var(--main-green)' }}>{t('gameRoom.hintsLeft')} {room.hintsLeft ?? 2}</span>
-                            {pendingGuesses.length > 0 && (
-                                <button
-                                    className="retro-btn"
-                                    style={{
-                                        padding: '0 5px', fontSize: '12px',
-                                        background: 'var(--alert-red)', color: '#fff',
-                                        animation: 'blink 1s infinite'
-                                    }}
-                                    onClick={handleReviewGuesses}
-                                >
-                                    {t('gameRoom.checkAnswer')} ({pendingGuesses.length})
-                                </button>
-                            )}
+                            <span style={{ fontSize: '12px', color: 'var(--main-green)' }}>{t('gameRoom.hintsLeft')} {room.hintsLeft}</span>
+
                         </div>
                     )}
                 </div>
@@ -249,6 +241,51 @@ export default function GameRoom() {
                     </>
                 )}
             </div>
+
+            {isQuestioner && pendingGuesses.length > 0 && (
+                <button
+                    className="retro-btn"
+                    style={{
+                        width: '100%',
+                        padding: '10px',
+                        background: 'var(--alert-red)',
+                        color: '#fff',
+                        fontWeight: 'bold',
+                        fontSize: '1.2em',
+                        animation: 'blink 1s infinite',
+                        marginBottom: '10px',
+                        border: '2px solid #fff',
+                        cursor: 'pointer'
+                    }}
+                    onClick={handleReviewGuesses}
+                >
+                    !!! {t('gameRoom.checkAnswer')} ({pendingGuesses.length}) !!!
+                </button>
+            )}
+
+            {isQuestioner && allGuessesExhausted && pendingGuesses.length === 0 && (
+                <button
+                    className="retro-btn"
+                    style={{
+                        width: '100%',
+                        padding: '10px',
+                        background: '#333',
+                        color: '#fff',
+                        fontWeight: 'bold',
+                        fontSize: '1.2em',
+                        marginBottom: '10px',
+                        border: '2px solid #fff',
+                        cursor: 'pointer'
+                    }}
+                    onClick={() => {
+                        if (window.confirm('모든 도전 기회가 소진되었습니다. 게임을 종료하고 정답을 공개하시겠습니까?')) {
+                            socket.emit('end_game');
+                        }
+                    }}
+                >
+                    [ 게임 종료 (모든 기회 소진) ]
+                </button>
+            )}
 
             <div className="chat-area">
                 {/* ... messages ... */}
@@ -311,10 +348,11 @@ export default function GameRoom() {
 
             {!isQuestioner && (
                 <button className="retro-btn"
-                    style={{ width: '100%', background: 'var(--alert-red)', color: '#fff', borderColor: '#500' }}
+                    style={{ width: '100%', background: (me?.guessesLeft > 0) ? 'var(--alert-red)' : '#555', color: '#fff', borderColor: '#500' }}
                     onClick={handleGuess}
+                    disabled={me?.guessesLeft <= 0}
                 >
-                    {t('gameRoom.guessButton')}
+                    {t('gameRoom.guessButton')} ({me?.guessesLeft ?? 0})
                 </button>
             )}
         </div>
