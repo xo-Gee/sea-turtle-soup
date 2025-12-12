@@ -98,5 +98,11 @@ export default {
         minutes: '분',
         count: '개',
         returnToWaiting: '대기실로 돌아가기'
+    },
+    notFound: {
+        title: 'ERROR 404',
+        message: '페이지를 찾을 수 없습니다.',
+        desc: '존재하지 않는 방이거나 잘못된 주소입니다.',
+        home: '메인으로 이동'
     }
 };

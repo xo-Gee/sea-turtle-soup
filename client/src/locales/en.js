@@ -98,5 +98,11 @@ export default {
         minutes: 'min',
         count: '',
         returnToWaiting: 'Return to Waiting Room'
+    },
+    notFound: {
+        title: 'ERROR 404',
+        message: 'Page Not Found',
+        desc: 'The room does not exist or the address is incorrect.',
+        home: 'Return to Main'
     }
 };

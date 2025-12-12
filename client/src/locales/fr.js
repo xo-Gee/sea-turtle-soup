@@ -98,5 +98,11 @@ export default {
         minutes: 'min',
         count: '',
         returnToWaiting: "Retour à la salle d'attente"
+    },
+    notFound: {
+        title: 'ERROR 404',
+        message: 'Page non trouvée.',
+        desc: 'La salle n\'existe pas ou l\'adresse est incorrecte.',
+        home: 'Retour à l\'accueil'
     }
 };

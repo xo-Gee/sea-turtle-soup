@@ -98,5 +98,11 @@ export default {
         minutes: '分',
         count: '個',
         returnToWaiting: '待機室に戻る'
+    },
+    notFound: {
+        title: 'ERROR 404',
+        message: 'ページが見つかりません。',
+        desc: '存在しない部屋か、アドレスが間違っています。',
+        home: 'メインへ戻る'
     }
 };

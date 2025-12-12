@@ -97,6 +97,12 @@ export default {
         totalQuestions: '總提問數:',
         minutes: '分',
         count: '個',
-        returnToWaiting: '返回等待室'
+        returnToWaiting: '返回等候室'
+    },
+    notFound: {
+        title: 'ERROR 404',
+        message: '未找到頁面。',
+        desc: '房間不存在或地址錯誤。',
+        home: '返回主頁'
     }
 };

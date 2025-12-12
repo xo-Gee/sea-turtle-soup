@@ -97,6 +97,12 @@ export default {
         totalQuestions: '总提问数:',
         minutes: '分',
         count: '个',
-        returnToWaiting: '返回等待室'
+        returnToWaiting: '返回等候室'
+    },
+    notFound: {
+        title: 'ERROR 404',
+        message: '未找到页面。',
+        desc: '房间不存在或地址错误。',
+        home: '返回主页'
     }
 };

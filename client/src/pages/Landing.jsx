@@ -97,13 +97,13 @@ export default function Landing() {
             background: 'radial-gradient(circle, #001100 0%, #000000 90%)',
             position: 'relative'
         }}>
-            {/* <button
+            <button
                 className="retro-btn"
                 style={{ position: 'absolute', top: '20px', right: '20px', fontSize: '12px', padding: '5px 10px' }}
                 onClick={handleLanguageClick}
             >
                 [ LANGUAGE ]
-            </button> */}
+            </button>
 
             <img src="/logo.png" alt="Sea Turtle Soup Logo" style={{ maxWidth: '100%', marginBottom: '30px' }} />
 
