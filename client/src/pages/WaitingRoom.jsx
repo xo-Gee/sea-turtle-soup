@@ -98,7 +98,7 @@ export default function WaitingRoom() {
             let problem = '';
             let solution = '';
 
-            const { close } = showCustom({
+            showCustom({
                 title: t('waitingRoom.createScenario'),
                 message: t('waitingRoom.enterScenarioInfo'),
                 children: (

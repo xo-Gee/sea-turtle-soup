@@ -53,6 +53,11 @@ export default function GameRoom() {
             setRoom(updatedRoom);
         };
 
+        const handleGameStarted = (updatedRoom) => {
+            setRoom(updatedRoom);
+            setMessages(updatedRoom.messages || []);
+        };
+
         const handleError = (err) => {
             if (err.message !== '방을 찾을 수 없습니다.') {
                 // Generic error handling
