@@ -110,7 +110,7 @@ export default {
         message: 'Page Not Found',
         desc: 'The room does not exist or the address is incorrect.',
         home: 'Return to Main'
-    }
+    },
     howToPlay: {
         step1Title: "What is Sea Turtle Soup?",
         step1Content: "It is lateral thinking puzzle game where you find the hidden truth\nby asking questions that can be answered with\n'Yes', 'No', or 'Irrelevant' to the story told by the host.",

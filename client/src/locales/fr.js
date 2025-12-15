@@ -104,7 +104,7 @@ export default {
         message: 'Page non trouvée.',
         desc: 'La salle n\'existe pas ou l\'adresse est incorrecte.',
         home: 'Retour à l\'accueil'
-    }
+    },
     howToPlay: {
         step1Title: "Qu'est-ce que la Soupe de Tortue ?",
         step1Content: "C'est un jeu d'énigmes de pensée latérale où,\nen posant des questions auxquelles on peut répondre par\n'Oui', 'Non' ou 'Non pertinent' à l'histoire racontée,\nvous devez trouver la vérité cachée.",

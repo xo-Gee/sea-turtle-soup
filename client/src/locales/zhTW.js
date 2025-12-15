@@ -104,7 +104,7 @@ export default {
         message: '未找到頁面。',
         desc: '房間不存在或地址錯誤。',
         home: '返回主頁'
-    }
+    },
     howToPlay: {
         step1Title: "什麼是海龜湯？",
         step1Content: "這是一款水平思考推理遊戲。\n聆聽出題者講述的離奇故事，\n通過提問可以回答「是」、「否」或「不重要」的問題，\n找出隱藏的真相。",

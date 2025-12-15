@@ -104,7 +104,7 @@ export default {
         message: 'Página no encontrada.',
         desc: 'La sala no existe o la dirección es incorrecta.',
         home: 'Volver al inicio'
-    }
+    },
     howToPlay: {
         step1Title: "¿Qué es Sea Turtle Soup?",
         step1Content: "Es un juego de rompecabezas de pensamiento lateral\ndonde encuentras la verdad oculta\nhaciendo preguntas que se pueden responder con\n'Sí', 'No' o 'Irrelevante' a la historia contada.",

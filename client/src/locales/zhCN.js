@@ -104,7 +104,7 @@ export default {
         message: '未找到页面。',
         desc: '房间不存在或地址错误。',
         home: '返回主页'
-    }
+    },
     howToPlay: {
         step1Title: "什么是海龟汤？",
         step1Content: "这是一款水平思考推理游戏。\n聆听出题者讲述的离奇故事，\n通过提问可以回答“是”、“否”或“不重要”的问题，\n找出隐藏的真相。",
