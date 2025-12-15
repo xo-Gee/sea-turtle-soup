@@ -105,4 +105,23 @@ export default {
         desc: '房間不存在或地址錯誤。',
         home: '返回主頁'
     }
+    howToPlay: {
+        step1Title: "什麼是海龜湯？",
+        step1Content: "這是一款水平思考推理遊戲。\n聆聽出題者講述的離奇故事，\n通過提問可以回答「是」、「否」或「不重要」的問題，\n找出隱藏的真相。",
+        step2Title: "示例問題",
+        step2Example: "「男人喝了一口湯，\n立刻跳下了懸崖。\n為什麼？」",
+        step2Desc: "您必須通過提問找出\n這離奇情況發生的原因。",
+        step3Title: "提問",
+        step3Desc: "您可以向出題者提問。",
+        step3Q1: "Q: 湯壞了嗎？",
+        step3A1: "A: 否",
+        step3Q2: "Q: 有人死了嗎？",
+        step3A2: "A: 是",
+        step3Q3: "Q: 是因為內疚嗎？",
+        step3A3: "A: 是",
+        step3Desc2: "通過這些問題收集線索。",
+        step4Title: "答案",
+        step4Desc: "結合所有線索找到答案並獲勝！",
+        step4Answer: "「男人過去遇難時，誤以為同伴的肉是海龜湯而吃下，後來喝到真正的海龜湯，意識到真相，因內疚而自殺。」"
+    }
 };

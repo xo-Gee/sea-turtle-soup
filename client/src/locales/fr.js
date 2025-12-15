@@ -105,4 +105,23 @@ export default {
         desc: 'La salle n\'existe pas ou l\'adresse est incorrecte.',
         home: 'Retour à l\'accueil'
     }
+    howToPlay: {
+        step1Title: "Qu'est-ce que la Soupe de Tortue ?",
+        step1Content: "C'est un jeu d'énigmes de pensée latérale où,\nen posant des questions auxquelles on peut répondre par\n'Oui', 'Non' ou 'Non pertinent' à l'histoire racontée,\nvous devez trouver la vérité cachée.",
+        step2Title: "Exemple",
+        step2Example: "\"Un homme a mangé une cuillerée de soupe,\npuis a immédiatement sauté d'une falaise.\nPourquoi ?\"",
+        step2Desc: "Vous devez comprendre pourquoi cette situation bizarre s'est produite\nà travers vos questions.",
+        step3Title: "Poser des Questions",
+        step3Desc: "Vous pouvez poser des questions à l'animateur.",
+        step3Q1: "Q: La soupe était-elle avariée ?",
+        step3A1: "R: Non",
+        step3Q2: "Q: Quelqu'un est-il mort ?",
+        step3A2: "R: Oui",
+        step3Q3: "Q: Est-ce à cause de la culpabilité ?",
+        step3A3: "R: Oui",
+        step3Desc2: "Rassemblez des indices grâce à ces questions.",
+        step4Title: "La Réponse",
+        step4Desc: "Combinez tous les indices pour trouver la réponse et gagner !",
+        step4Answer: "\"L'homme avait mangé de la chair humaine en pensant que c'était de la soupe de tortue lorsqu'il avait fait naufrage dans le passé. Plus tard, il a mangé de la vraie soupe de tortue, a réalisé la vérité et s'est suicidé par culpabilité.\""
+    }
 };

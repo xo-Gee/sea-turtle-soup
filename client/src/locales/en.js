@@ -111,4 +111,23 @@ export default {
         desc: 'The room does not exist or the address is incorrect.',
         home: 'Return to Main'
     }
+    howToPlay: {
+        step1Title: "What is Sea Turtle Soup?",
+        step1Content: "It is lateral thinking puzzle game where you find the hidden truth\nby asking questions that can be answered with\n'Yes', 'No', or 'Irrelevant' to the story told by the host.",
+        step2Title: "Example Problem",
+        step2Example: "\"A man ate a spoonful of soup,\nthen immediately jumped off a cliff.\nWhy?\"",
+        step2Desc: "You must figure out why this bizarre situation happened\nthrough your questions.",
+        step3Title: "Asking Questions",
+        step3Desc: "You can ask the host questions.",
+        step3Q1: "Q: Was the soup spoiled?",
+        step3A1: "A: No",
+        step3Q2: "Q: Did someone die?",
+        step3A2: "A: Yes",
+        step3Q3: "Q: Is it because of guilt?",
+        step3A3: "A: Yes",
+        step3Desc2: "Gather clues through these questions.",
+        step4Title: "The Answer",
+        step4Desc: "Combine all clues to find the answer and win!",
+        step4Answer: "\"The man had eaten human flesh thinking it was sea turtle soup when he was stranded in the past. Later, he ate real sea turtle soup, realized the truth, and committed suicide out of guilt.\""
+    }
 };

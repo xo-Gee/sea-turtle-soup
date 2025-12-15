@@ -105,4 +105,23 @@ export default {
         desc: '房间不存在或地址错误。',
         home: '返回主页'
     }
+    howToPlay: {
+        step1Title: "什么是海龟汤？",
+        step1Content: "这是一款水平思考推理游戏。\n聆听出题者讲述的离奇故事，\n通过提问可以回答“是”、“否”或“不重要”的问题，\n找出隐藏的真相。",
+        step2Title: "示例问题",
+        step2Example: "“男人喝了一口汤，\n立刻跳下了悬崖。\n为什么？”",
+        step2Desc: "您必须通过提问找出\n这离奇情况发生的原因。",
+        step3Title: "提问",
+        step3Desc: "您可以向出题者提问。",
+        step3Q1: "Q: 汤坏了吗？",
+        step3A1: "A: 否",
+        step3Q2: "Q: 有人死了吗？",
+        step3A2: "A: 是",
+        step3Q3: "Q: 是因为内疚吗？",
+        step3A3: "A: 是",
+        step3Desc2: "通过这些问题收集线索。",
+        step4Title: "答案",
+        step4Desc: "结合所有线索找到答案并获胜！",
+        step4Answer: "“男人过去遇难时，误以为同伴的肉是海龟汤而吃下，后来喝到真正的海龟汤，意识到真相，因内疚而自杀。”"
+    }
 };

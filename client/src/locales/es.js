@@ -105,4 +105,23 @@ export default {
         desc: 'La sala no existe o la dirección es incorrecta.',
         home: 'Volver al inicio'
     }
+    howToPlay: {
+        step1Title: "¿Qué es Sea Turtle Soup?",
+        step1Content: "Es un juego de rompecabezas de pensamiento lateral\ndonde encuentras la verdad oculta\nhaciendo preguntas que se pueden responder con\n'Sí', 'No' o 'Irrelevante' a la historia contada.",
+        step2Title: "Ejemplo",
+        step2Example: "\"Un hombre comió una cucharada de sopa,\nluego inmediatamente saltó por un acantilado.\n¿Por qué?\"",
+        step2Desc: "Debes averiguar por qué sucedió esta extraña situación\na través de tus preguntas.",
+        step3Title: "Hacer Preguntas",
+        step3Desc: "Puedes hacer preguntas al anfitrión.",
+        step3Q1: "P: ¿Estaba la sopa estropeada?",
+        step3A1: "R: No",
+        step3Q2: "P: ¿Alguien murió?",
+        step3A2: "R: Sí",
+        step3Q3: "P: ¿Es por culpa?",
+        step3A3: "R: Sí",
+        step3Desc2: "Reúne pistas a través de estas preguntas.",
+        step4Title: "La Respuesta",
+        step4Desc: "¡Combina todas las pistas para encontrar la respuesta y ganar!",
+        step4Answer: "\"El hombre había comido carne humana pensando que era sopa de tortuga cuando naufragó en el pasado. Más tarde, comió sopa de tortuga real, se dio cuenta de la verdad y se suicidó por culpa.\""
+    }
 };
