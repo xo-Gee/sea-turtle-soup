@@ -79,6 +79,7 @@ export default {
         judgeAnswer: 'Judge Answer',
         guessAttempt: "'s guess:",
         endGameConfirm: 'All guesses have been exhausted.\nDo you want to end the game and reveal the answer?',
+        endGameTitle: 'Game End',
         pending: 'Pending:',
         correct: 'Correct!',
         incorrect: 'Incorrect',

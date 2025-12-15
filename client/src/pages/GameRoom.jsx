@@ -363,7 +363,7 @@ export default function GameRoom() {
                     onClick={async () => {
                         const confirmed = await showConfirm(
                             t('gameRoom.endGameConfirm'),
-                            t('common.confirm')
+                            t('gameRoom.endGameTitle')
                         );
                         if (confirmed) {
                             socket.emit('end_game');
