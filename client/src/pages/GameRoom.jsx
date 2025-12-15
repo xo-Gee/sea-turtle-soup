@@ -288,7 +288,15 @@ export default function GameRoom() {
                         </button>
                     </div>
                     {!isQuestioner && (
-                        <button className="retro-btn" style={{ fontSize: '12px', padding: '0 5px', height: '24px', marginLeft: '10px' }} onClick={handleViewAnswers}>
+                        <button className="retro-btn" style={{
+                            fontSize: '12px',
+                            padding: '2px 8px',
+                            marginLeft: '10px',
+                            background: 'var(--main-green)',
+                            color: '#000',
+                            fontWeight: 'bold',
+                            borderColor: '#000'
+                        }} onClick={handleViewAnswers}>
                             📑 {t('gameRoom.viewAnswers')}
                         </button>
                     )}
