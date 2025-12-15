@@ -72,8 +72,7 @@ export default function Lobby() {
             </div>
 
             <div className="win-box" style={{ textAlign: 'center', marginBottom: '20px' }}>
-                {t('lobby.title')}
-                <div style={{ fontSize: '10px', color: '#666', marginTop: '5px' }}>v0.3.1</div>
+                <h1 className="retro-title">{t('lobby.title')} <span style={{ fontSize: '0.5em', color: '#666' }}>v0.4.0</span></h1>
             </div>
 
             <div className="room-list" style={{ flexGrow: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '10px' }}>
