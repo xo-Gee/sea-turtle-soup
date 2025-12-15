@@ -78,6 +78,7 @@ export default {
         guessChallenge: '정답 도전',
         judgeAnswer: '정답 판정',
         guessAttempt: '님의 정답 도전:',
+        endGameConfirm: '모든 도전 기회가 소진되었습니다.\n게임을 종료하고 정답을 공개하시겠습니까?',
         pending: '남은 대기:',
         correct: '정답!',
         incorrect: '오답',

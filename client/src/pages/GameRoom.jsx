@@ -360,8 +360,12 @@ export default function GameRoom() {
                         border: '2px solid #fff',
                         cursor: 'pointer'
                     }}
-                    onClick={() => {
-                        if (window.confirm('모든 도전 기회가 소진되었습니다. 게임을 종료하고 정답을 공개하시겠습니까?')) {
+                    onClick={async () => {
+                        const confirmed = await showConfirm(
+                            t('common.confirm'),
+                            t('gameRoom.endGameConfirm')
+                        );
+                        if (confirmed) {
                             socket.emit('end_game');
                         }
                     }}
