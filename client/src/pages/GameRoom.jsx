@@ -148,6 +148,64 @@ export default function GameRoom() {
         });
     };
 
+    const handleViewAnswers = () => {
+        // Collect Q&A pairs
+        const qnaPairs = [];
+        messages.forEach(msg => {
+            if (msg.type === 'QUESTION') {
+                const answer = messages.find(m => m.type === 'ANSWER' && m.targetId === msg.id);
+                if (answer) {
+                    qnaPairs.push({ question: msg.message, answer: answer.message, id: msg.id });
+                }
+            }
+        });
+
+        // Group by answer type
+        const grouped = {
+            'YES': qnaPairs.filter(p => p.answer === 'YES'),
+            'NO': qnaPairs.filter(p => p.answer === 'NO'),
+            'CRITICAL': qnaPairs.filter(p => p.answer === 'CRITICAL'),
+            'SKIP': qnaPairs.filter(p => p.answer === 'SKIP')
+        };
+
+        const totalCount = qnaPairs.length;
+
+        showCustom({
+            title: t('gameRoom.answerSummary'),
+            message: `${t('gameRoom.totalAnswers')}: ${totalCount}${t('gameRoom.count')}`,
+            children: (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginTop: '10px', maxHeight: '60vh', overflowY: 'auto' }}>
+                    {Object.entries(grouped).map(([type, items]) => {
+                        if (items.length === 0) return null;
+
+                        const borderColor = type === 'YES' ? 'var(--alert-red)' :
+                            type === 'NO' ? 'red' :
+                                type === 'CRITICAL' ? 'var(--main-green)' : '#888';
+
+                        const textColor = type === 'YES' ? '#fff' :
+                            type === 'NO' ? 'red' :
+                                type === 'CRITICAL' ? 'var(--main-green)' : '#888';
+
+                        return (
+                            <div key={type} className="win-box" style={{ margin: 0, borderColor: borderColor, color: textColor, textAlign: 'left' }}>
+                                <div style={{ fontWeight: 'bold', borderBottom: `1px dashed ${borderColor}`, marginBottom: '5px', paddingBottom: '3px' }}>
+                                    {type} ({items.length})
+                                </div>
+                                <ul style={{ listStyle: 'none', padding: 0, margin: 0, color: '#ccc', fontSize: '0.9em' }}>
+                                    {items.map(item => (
+                                        <li key={item.id} style={{ marginBottom: '3px' }}>
+                                            - {item.question}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        );
+                    })}
+                </div>
+            )
+        });
+    };
+
     const handleGuess = async () => {
         const guess = await showPrompt(t('gameRoom.describeAnswer'), t('gameRoom.guessChallenge'));
         if (guess) {
@@ -229,6 +287,11 @@ export default function GameRoom() {
                             {isProblemOpen ? '▲' : '▼'}
                         </button>
                     </div>
+                    {!isQuestioner && (
+                        <button className="retro-btn" style={{ fontSize: '12px', padding: '0 5px', height: '24px', marginLeft: '10px' }} onClick={handleViewAnswers}>
+                            📑 {t('gameRoom.viewAnswers')}
+                        </button>
+                    )}
                     {isQuestioner && (
                         <div style={{ display: 'flex', gap: '10px' }}>
                             <span style={{ fontSize: '12px', color: 'var(--main-green)' }}>{t('gameRoom.hintsLeft')} {room.hintsLeft}</span>
