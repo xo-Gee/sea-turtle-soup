@@ -87,7 +87,11 @@ export default {
         send: 'Enviar',
         guessButton: '!!! Adivinar Respuesta !!!',
         noHints: 'Has usado todas las pistas.',
-        guessFailed: '¡El intento falló!'
+        guessFailed: '¡El intento falló!',
+        viewAnswers: 'Pistas',
+        answerSummary: 'Resumen de Pistas',
+        totalAnswers: 'Pistas Totales',
+        count: ''
     },
     result: {
         gameOver: 'JUEGO TERMINADO',

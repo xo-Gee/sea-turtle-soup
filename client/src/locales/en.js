@@ -83,7 +83,7 @@ export default {
         pending: 'Pending:',
         correct: 'Correct!',
         incorrect: 'Incorrect',
-        viewAnswers: 'View Clues',
+        viewAnswers: 'Clues',
         answerSummary: 'Clue Summary',
         totalAnswers: 'Total Clues',
         count: '',

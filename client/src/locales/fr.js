@@ -87,7 +87,11 @@ export default {
         send: 'Envoyer',
         guessButton: '!!! Deviner la réponse !!!',
         noHints: 'Vous avez utilisé tous les indices.',
-        guessFailed: 'La tentative a échoué!'
+        guessFailed: 'La tentative a échoué!',
+        viewAnswers: 'Indices',
+        answerSummary: 'Résumé des indices',
+        totalAnswers: 'Indices Totaux',
+        count: ''
     },
     result: {
         gameOver: 'JEU TERMINÉ',

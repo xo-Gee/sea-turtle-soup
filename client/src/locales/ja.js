@@ -87,7 +87,11 @@ export default {
         send: '送信',
         guessButton: '!!! 正解に挑戦 !!!',
         noHints: 'ヒントをすべて使い切りました。',
-        guessFailed: 'さんの挑戦は失敗しました!'
+        guessFailed: 'さんの挑戦は失敗しました!',
+        viewAnswers: '手がかり',
+        answerSummary: '手がかりの概要',
+        totalAnswers: '合計手がかり',
+        count: '個'
     },
     result: {
         gameOver: 'GAME OVER',

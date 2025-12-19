@@ -87,7 +87,11 @@ export default {
         send: '發送',
         guessButton: '!!! 挑戰答案 !!!',
         noHints: '提示已用完。',
-        guessFailed: '的挑戰失敗了!'
+        guessFailed: '的挑戰失敗了!',
+        viewAnswers: '線索',
+        answerSummary: '線索摘要',
+        totalAnswers: '總線索',
+        count: '個'
     },
     result: {
         gameOver: '遊戲結束',
