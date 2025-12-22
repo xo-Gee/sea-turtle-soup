@@ -77,7 +77,9 @@ module.exports = (io, socket) => {
         const joinMsg = {
             id: Date.now(),
             type: 'SYSTEM',
-            message: `${nickname}님이 입장하셨습니다.`
+            message: `${nickname}님이 입장하셨습니다.`,
+            translationKey: 'system.joined',
+            args: { nickname }
         };
         room.messages.push(joinMsg);
         io.to(roomId).emit('message_received', joinMsg);
@@ -102,7 +104,9 @@ module.exports = (io, socket) => {
                 const leaveMsg = {
                     id: Date.now(),
                     type: 'SYSTEM',
-                    message: `${leavingPlayer.nickname}님이 퇴장하셨습니다.`
+                    message: `${leavingPlayer.nickname}님이 퇴장하셨습니다.`,
+                    translationKey: 'system.left',
+                    args: { nickname: leavingPlayer.nickname }
                 };
                 room.messages.push(leaveMsg);
                 io.to(roomId).emit('message_received', leaveMsg);
@@ -115,6 +119,7 @@ module.exports = (io, socket) => {
                         // Simple logic: next player becomes host
                         room.players[0].isHost = true;
                         room.players[0].isReady = true;
+                        room.hostId = room.players[0].id; // CRITICAL FIX: Update room.hostId
                     }
                     io.to(roomId).emit('player_left', room);
                 }

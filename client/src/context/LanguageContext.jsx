@@ -28,7 +28,7 @@ export const LanguageProvider = ({ children }) => {
         localStorage.setItem('language', lang);
     };
 
-    const t = (key) => {
+    const t = (key, args = {}) => {
         const keys = key.split('.');
         let value = locales[language];
         for (const k of keys) {
@@ -38,6 +38,13 @@ export const LanguageProvider = ({ children }) => {
                 return key; // Return key if not found
             }
         }
+
+        if (typeof value === 'string' && args) {
+            return value.replace(/{{(\w+)}}/g, (_, k) => {
+                return args[k] !== undefined ? args[k] : `{{${k}}}`;
+            });
+        }
+
         return value;
     };
 

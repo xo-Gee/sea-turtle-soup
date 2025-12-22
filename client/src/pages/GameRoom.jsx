@@ -370,7 +370,7 @@ export default function GameRoom() {
                         }
                     }}
                 >
-                    [ 게임 종료 (모든 기회 소진) ]
+                    {t('gameRoom.gameEndButton')}
                 </button>
             )}
 
@@ -382,7 +382,7 @@ export default function GameRoom() {
                     const answerMsg = messages.find(m => m.type === 'ANSWER' && m.targetId === msg.id);
 
                     if (msg.type === 'ANSWER') return null;
-                    if (msg.type === 'SYSTEM') return <div key={i} className="msg sys">{msg.message}</div>;
+                    if (msg.type === 'SYSTEM') return <div key={i} className="msg sys">{msg.translationKey ? t(msg.translationKey, msg.args) : msg.message}</div>;
                     if (msg.type === 'HINT') return <div key={i} className="msg sys" style={{ color: 'var(--main-green)', border: '1px dashed var(--main-green)' }}>{t('gameRoom.hintLabel')} {msg.message}</div>;
 
                     return (

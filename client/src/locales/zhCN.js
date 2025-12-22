@@ -11,6 +11,10 @@ export default {
         critical: '关键',
         skip: '跳过'
     },
+    system: {
+        joined: '{{nickname}} 加入了房间。',
+        left: '{{nickname}} 离开了房间。'
+    },
     landing: {
         nicknamePlaceholder: '昵称...',
         enter: '进入 >',
@@ -38,7 +42,9 @@ export default {
         people: '人',
         passwordLabel: '密码 (可选)',
         create: '创建',
-        enterRoomTitle: '请输入房间标题。'
+        enterRoomTitle: '请输入房间标题。',
+        maxHints: '提示数量:',
+        maxGuesses: '回答机会:'
     },
     waitingRoom: {
         roomNotFound: '找不到房间。',
@@ -78,6 +84,8 @@ export default {
         guessChallenge: '挑战答案',
         judgeAnswer: '判定答案',
         guessAttempt: '的挑战:',
+        endGameConfirm: '所有机会已耗尽。\n是否结束游戏并公布答案?',
+        endGameTitle: '游戏结束',
         pending: '剩余等待:',
         correct: '正确!',
         incorrect: '错误',
@@ -91,7 +99,8 @@ export default {
         viewAnswers: '线索',
         answerSummary: '线索摘要',
         totalAnswers: '总线索',
-        count: '个'
+        count: '个',
+        gameEndButton: '[ 游戏结束 (机会耗尽) ]'
     },
     result: {
         gameOver: '游戏结束',

@@ -11,6 +11,10 @@ export default {
         critical: 'CRÍTICO',
         skip: 'SALTAR'
     },
+    system: {
+        joined: '{{nickname}} se ha unido a la sala.',
+        left: '{{nickname}} ha salido de la sala.'
+    },
     landing: {
         nicknamePlaceholder: 'NICKNAME...',
         enter: 'ENTRAR >',
@@ -38,7 +42,9 @@ export default {
         people: '',
         passwordLabel: 'Contraseña (Opcional)',
         create: 'Crear',
-        enterRoomTitle: 'Por favor ingresa un título para la sala.'
+        enterRoomTitle: 'Por favor ingresa un título para la sala.',
+        maxHints: 'Pistas:',
+        maxGuesses: 'Intentos:'
     },
     waitingRoom: {
         roomNotFound: 'Sala no encontrada.',
@@ -78,6 +84,8 @@ export default {
         guessChallenge: 'Adivinar Respuesta',
         judgeAnswer: 'Juzgar Respuesta',
         guessAttempt: ' intento:',
+        endGameConfirm: 'Se han agotado todos los intentos.\n¿Quieres terminar el juego y revelar la respuesta?',
+        endGameTitle: 'Fin del Juego',
         pending: 'Pendiente:',
         correct: '¡Correcto!',
         incorrect: 'Incorrecto',
@@ -91,7 +99,8 @@ export default {
         viewAnswers: 'Pistas',
         answerSummary: 'Resumen de Pistas',
         totalAnswers: 'Pistas Totales',
-        count: ''
+        count: '',
+        gameEndButton: '[ Fin del Juego (Intentos agotados) ]'
     },
     result: {
         gameOver: 'JUEGO TERMINADO',

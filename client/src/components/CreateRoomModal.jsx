@@ -48,7 +48,7 @@ export default function CreateRoomModal({ onClose, nickname }) {
 
                     <div style={{ display: 'flex', gap: '10px' }}>
                         <div style={{ flex: 1 }}>
-                            <label>힌트 갯수: {maxHints}</label>
+                            <label>{t('lobby.maxHints')} {maxHints}</label>
                             <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                                 <button className="retro-btn" style={{ width: '30px' }}
                                     onClick={() => setMaxHints(Math.max(0, maxHints - 1))}>-</button>
@@ -58,7 +58,7 @@ export default function CreateRoomModal({ onClose, nickname }) {
                             </div>
                         </div>
                         <div style={{ flex: 1 }}>
-                            <label>정답 도전: {maxGuesses}</label>
+                            <label>{t('lobby.maxGuesses')} {maxGuesses}</label>
                             <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                                 <button className="retro-btn" style={{ width: '30px' }}
                                     onClick={() => setMaxGuesses(Math.max(1, maxGuesses - 1))}>-</button>

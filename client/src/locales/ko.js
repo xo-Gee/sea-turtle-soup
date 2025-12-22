@@ -11,6 +11,10 @@ export default {
         critical: 'CRITICAL',
         skip: 'SKIP'
     },
+    system: {
+        joined: '{{nickname}}님이 입장하셨습니다.',
+        left: '{{nickname}}님이 퇴장하셨습니다.'
+    },
     landing: {
         nicknamePlaceholder: 'NICKNAME...',
         enter: '입장하기 >',
@@ -38,7 +42,9 @@ export default {
         people: '명',
         passwordLabel: '비밀번호 (선택)',
         create: '만들기',
-        enterRoomTitle: '방 제목을 입력하세요.'
+        enterRoomTitle: '방 제목을 입력하세요.',
+        maxHints: '힌트 갯수:',
+        maxGuesses: '정답 도전:'
     },
     waitingRoom: {
         roomNotFound: '방을 찾을 수 없습니다.',
@@ -93,7 +99,8 @@ export default {
         send: '전송',
         guessButton: '!!! 정답 도전 !!!',
         noHints: '힌트를 모두 사용했습니다.',
-        guessFailed: '님의 정답 도전이 실패했습니다!'
+        guessFailed: '님의 정답 도전이 실패했습니다!',
+        gameEndButton: '[ 게임 종료 (모든 기회 소진) ]'
     },
     result: {
         gameOver: 'GAME OVER',

@@ -273,7 +273,15 @@ export default function WaitingRoom() {
             <div className="chat-area" ref={chatContainerRef} onScroll={handleScroll} style={{ flexGrow: 1, marginBottom: '10px', border: '1px solid #333', position: 'relative' }}>
                 {chatLog.map((msg, i) => (
                     <div key={i} style={{ fontSize: '14px', marginBottom: '5px' }}>
-                        <span style={{ color: '#888' }}>{msg.nickname}:</span> {msg.message}
+                        {msg.type === 'SYSTEM' ? (
+                            <span style={{ color: 'var(--sys-msg-color)' }}>
+                                {msg.translationKey ? t(msg.translationKey, msg.args) : msg.message}
+                            </span>
+                        ) : (
+                            <>
+                                <span style={{ color: '#888' }}>{msg.nickname}:</span> {msg.message}
+                            </>
+                        )}
                     </div>
                 ))}
                 <div ref={chatEndRef} />

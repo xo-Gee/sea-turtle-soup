@@ -11,6 +11,10 @@ export default {
         critical: 'CRITICAL',
         skip: 'SKIP'
     },
+    system: {
+        joined: '{{nickname}} joined the room.',
+        left: '{{nickname}} left the room.'
+    },
     landing: {
         nicknamePlaceholder: 'NICKNAME...',
         enter: 'ENTER >',
@@ -38,7 +42,9 @@ export default {
         people: '',
         passwordLabel: 'Password (Optional)',
         create: 'Create',
-        enterRoomTitle: 'Please enter a room title.'
+        enterRoomTitle: 'Please enter a room title.',
+        maxHints: 'Hints:',
+        maxGuesses: 'Guesses:'
     },
     waitingRoom: {
         roomNotFound: 'Room not found.',
@@ -93,7 +99,8 @@ export default {
         send: 'Send',
         guessButton: '!!! Guess Answer !!!',
         noHints: 'You have used all hints.',
-        guessFailed: "'s guess failed!"
+        guessFailed: "'s guess failed!",
+        gameEndButton: '[ Game End (All guesses used) ]'
     },
     result: {
         gameOver: 'GAME OVER',

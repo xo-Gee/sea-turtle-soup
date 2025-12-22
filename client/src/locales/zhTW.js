@@ -11,6 +11,10 @@ export default {
         critical: '關鍵',
         skip: '跳過'
     },
+    system: {
+        joined: '{{nickname}} 加入了房間。',
+        left: '{{nickname}} 離開了房間。'
+    },
     landing: {
         nicknamePlaceholder: '暱稱...',
         enter: '進入 >',
@@ -38,7 +42,9 @@ export default {
         people: '人',
         passwordLabel: '密碼 (可選)',
         create: '創建',
-        enterRoomTitle: '請輸入房間標題。'
+        enterRoomTitle: '請輸入房間標題。',
+        maxHints: '提示數量:',
+        maxGuesses: '回答機會:'
     },
     waitingRoom: {
         roomNotFound: '找不到房間。',
@@ -78,6 +84,8 @@ export default {
         guessChallenge: '挑戰答案',
         judgeAnswer: '判定答案',
         guessAttempt: '的挑戰:',
+        endGameConfirm: '所有機會已耗盡。\n是否結束遊戲並公佈答案?',
+        endGameTitle: '遊戲結束',
         pending: '剩餘等待:',
         correct: '正確!',
         incorrect: '錯誤',
@@ -91,7 +99,8 @@ export default {
         viewAnswers: '線索',
         answerSummary: '線索摘要',
         totalAnswers: '總線索',
-        count: '個'
+        count: '個',
+        gameEndButton: '[ 遊戲結束 (機會耗盡) ]'
     },
     result: {
         gameOver: '遊戲結束',

@@ -11,6 +11,10 @@ export default {
         critical: 'CRITIQUE',
         skip: 'PASSER'
     },
+    system: {
+        joined: '{{nickname}} a rejoint la salle.',
+        left: '{{nickname}} a quitté la salle.'
+    },
     landing: {
         nicknamePlaceholder: 'NICKNAME...',
         enter: 'ENTRER >',
@@ -38,7 +42,9 @@ export default {
         people: '',
         passwordLabel: 'Mot de passe (Optionnel)',
         create: 'Créer',
-        enterRoomTitle: 'Veuillez entrer un titre de salle.'
+        enterRoomTitle: 'Veuillez entrer un titre de salle.',
+        maxHints: 'Indices:',
+        maxGuesses: 'Essais:'
     },
     waitingRoom: {
         roomNotFound: 'Salle introuvable.',
@@ -78,6 +84,8 @@ export default {
         guessChallenge: 'Deviner la réponse',
         judgeAnswer: 'Juger la réponse',
         guessAttempt: ' a tenté:',
+        endGameConfirm: 'Toutes les tentatives ont été épuisées.\nVoulez-vous terminer le jeu et révéler la réponse ?',
+        endGameTitle: 'Fin du Jeu',
         pending: 'En attente:',
         correct: 'Correct!',
         incorrect: 'Incorrect',
@@ -91,7 +99,8 @@ export default {
         viewAnswers: 'Indices',
         answerSummary: 'Résumé des indices',
         totalAnswers: 'Indices Totaux',
-        count: ''
+        count: '',
+        gameEndButton: '[ Fin du Jeu (Essais épuisés) ]'
     },
     result: {
         gameOver: 'JEU TERMINÉ',

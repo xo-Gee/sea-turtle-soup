@@ -11,6 +11,10 @@ export default {
         critical: '重要',
         skip: 'スキップ'
     },
+    system: {
+        joined: '{{nickname}}さんが入室しました。',
+        left: '{{nickname}}さんが退室しました。'
+    },
     landing: {
         nicknamePlaceholder: 'NICKNAME...',
         enter: '入場 >',
@@ -38,7 +42,9 @@ export default {
         people: '人',
         passwordLabel: 'パスワード (任意)',
         create: '作成',
-        enterRoomTitle: '部屋名を入力してください。'
+        enterRoomTitle: '部屋名を入力してください。',
+        maxHints: 'ヒント数:',
+        maxGuesses: '回答挑戦:'
     },
     waitingRoom: {
         roomNotFound: '部屋が見つかりません。',
@@ -78,6 +84,8 @@ export default {
         guessChallenge: '正解に挑戦',
         judgeAnswer: '正解判定',
         guessAttempt: 'さんの挑戦:',
+        endGameConfirm: 'すべての挑戦権を使い切りました。\nゲームを終了して正解を公開しますか？',
+        endGameTitle: 'ゲーム終了',
         pending: '残り待機:',
         correct: '正解!',
         incorrect: '不正解',
@@ -91,7 +99,8 @@ export default {
         viewAnswers: '手がかり',
         answerSummary: '手がかりの概要',
         totalAnswers: '合計手がかり',
-        count: '個'
+        count: '個',
+        gameEndButton: '[ ゲーム終了（挑戦権切れ） ]'
     },
     result: {
         gameOver: 'GAME OVER',
