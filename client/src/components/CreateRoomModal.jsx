@@ -36,7 +36,7 @@ export default function CreateRoomModal({ onClose, nickname }) {
                     </div>
 
                     <div>
-                        <label>{t('lobby.maxPlayersLabel')} {maxPlayers}{t('lobby.people')}</label>
+                        <label>{t('lobby.maxPlayersLabel')} {maxPlayers}</label>
                         <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                             <button className="retro-btn" style={{ width: '40px' }}
                                 onClick={() => setMaxPlayers(Math.max(2, maxPlayers - 1))}>-</button>
