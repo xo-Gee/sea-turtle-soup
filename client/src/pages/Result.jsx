@@ -20,16 +20,16 @@ export default function Result() {
             display: 'flex', flexDirection: 'column', height: '100%', padding: '20px',
             textAlign: 'center', justifyContent: 'center', gap: '20px'
         }}>
-            <div className="win-box" style={{ borderColor: 'var(--alert-red)', background: '#000' }}>
+            <div className="win-box" style={{ borderColor: 'var(--alert-red)', background: 'var(--list-bg)' }}>
                 <h1 style={{ color: 'var(--alert-red)', margin: '10px 0' }}>{t('result.gameOver')}</h1>
-                <div style={{ fontSize: '14px', color: '#fff' }}>{t('result.winner')} {room.winner}</div>
+                <div style={{ fontSize: '14px', color: 'var(--text-color)' }}>{t('result.winner')} {room.winner}</div>
             </div>
 
             <div className="win-box" style={{ textAlign: 'left', padding: '15px' }}>
                 <div style={{ color: 'var(--main-green)', marginBottom: '10px', borderBottom: '1px dashed #555' }}>
                     {t('result.truthRevealed')}
                 </div>
-                <div style={{ lineHeight: '1.6', color: '#fff' }}>
+                <div style={{ lineHeight: '1.6', color: 'var(--list-text)' }}>
                     {room.scenario?.solution}
                 </div>
             </div>

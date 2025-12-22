@@ -174,6 +174,10 @@ module.exports = (io, socket) => {
             return socket.emit('error', { message: '정답 도전 기회를 모두 사용했습니다.' });
         }
 
+        // Deduct guess immediately
+        player.guessesLeft -= 1;
+        io.to(room.roomId).emit('player_update', room);
+
         // Notify Questioner
         const questioner = room.players.find(p => p.role === 'QUESTIONER');
         if (questioner) {
@@ -198,18 +202,16 @@ module.exports = (io, socket) => {
             room.winner = room.players.find(p => p.id === guesserId)?.nickname;
             io.to(room.roomId).emit('game_over', room);
         } else {
-            // Decrement guessesLeft for the guesser
+            // Already decremented in submitGuess
             const guesser = room.players.find(p => p.id === guesserId);
-            if (guesser && guesser.guessesLeft > 0) {
-                guesser.guessesLeft -= 1;
-            }
 
             // Notify failure and update room state
             io.to(room.roomId).emit('guess_failed', {
                 guesserName: guesser?.nickname,
                 guessesLeft: guesser?.guessesLeft
             });
-            io.to(room.roomId).emit('player_update', room); // Sync room state
+            // io.to(room.roomId).emit('player_update', room); // Already updated in submitGuess, but maybe needed if state changed elsewhere? 
+            // Actually, safe to emit update again just in case, but essentially guesser.guessesLeft is already correct.
         }
     };
 

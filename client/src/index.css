@@ -1,23 +1,140 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+/* Define Dark Mode (Default) under a specific class as requested */
+body.dark-mode {
+  /* Default: Dark Mode (Current Design, exact preservation) */
+  --bg-color: radial-gradient(circle, #001100 0%, #000000 90%);
+  --panel-bg: rgba(0, 20, 0, 0.8);
+  --text-color: #00ff41;
+  --main-green: #00ff41;
+  --dim-green: #008f11;
+  --item-bg: #fff;
+  /* Currently some inputs use white bg with black text even in dark mode? Checking design-system.css... Yes, retro-input uses #fff in design-system currently? No, wait. */
+  /* design-system.css currently has .retro-input { background: #000; ... } in the rolled back version? 
+     Let's check the viewed file. Step 3227 showed .retro-input { background: var(--item-bg) ... } but referencing variables. 
+     Wait, I need to be careful. The user said "Don't change Dark Mode CSS". 
+     I should match the exact hardcoded values from the *current* state if I'm replacing them with variables. 
+     Currently design-system.css uses #000 for body background, #1a1a1a is in index.css root. 
+     I will define the variables to match the *visuals*.
+  */
+  --bg-solid: #1a1a1a;
+  /* Fallback or solid color */
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  --input-bg: #000000;
+  /* Retro inputs are black in dark mode */
+  --input-text: #00ff41;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --button-bg: #c0c0c0;
+  /* Currently buttons are gray? Or black? retro-btn uses var(--win-gray) which is #c0c0c0 in design-system.css step 3226. */
+  --button-border-light: #ffffff;
+  --button-border-dark: #000000;
+
+  --win-border-color: #00ff41;
+  /* Green borders for windows */
+  --win-shadow-color: #008f11;
+
+  --list-bg: #000000;
+  --list-text: #ffffff;
+  /* Wait, list items in Lobby? */
+
+  /* Chat */
+  --msg-me-bg: #00ff41;
+  --msg-me-text: #000000;
+  --msg-other-bg: #333333;
+  --msg-other-text: #ffffff;
+
+  /* Fonts */
+  --font-main: 'NeoDunggeunmo', 'VT323', monospace;
+
+  /* Overlay */
+  --crt-display: block;
+  /* Headers & Primary Actions */
+  --header-bg: #00ff41;
+  /* Green for Modals/Headers in Dark Mode */
+  --header-text: #000000;
+  --primary-btn-bg: #00ff41;
+  /* Green for Primary Buttons */
+  --primary-btn-text: #000000;
+  --highlight-bg: #00ff41;
+  /* For selection states */
+  --highlight-text: #000000;
+  /* For selection states */
+  --highlight-text: #000000;
+
+  /* System Messages */
+  --sys-msg-color: #ff0;
+  /* Yellow for Dark Mode */
+  --sys-msg-border: #555;
+  /* Gray dotted line */
+}
+
+body.light-mode {
+  /* Windows 98 Light Mode */
+  --bg-color: #008080;
+  /* Teal */
+  --panel-bg: #c0c0c0;
+  /* Silver */
+  --text-color: #000000;
+  /* Black text */
+  --main-green: #000080;
+  /* Navy Blue (replaces main green) */
+  --dim-green: #000080;
+
+  --input-bg: #ffffff;
+  --input-text: #000000;
+
+  --button-bg: #c0c0c0;
+  --button-border-light: #ffffff;
+  --button-border-dark: #000000;
+
+  --win-border-color: #dfdfdf;
+  /* Silver/Gray borders */
+  --win-shadow-color: #808080;
+
+  --list-bg: #ffffff;
+  --list-text: #000000;
+
+  /* Chat */
+  --msg-me-bg: #000080;
+  /* Navy Blue */
+  --msg-me-text: #ffffff;
+  /* White text */
+  --msg-other-bg: #e0e0e0;
+  /* Light Gray */
+  --msg-other-text: #000000;
+
+  /* Fonts */
+  --font-main: 'MS Sans Serif', 'Arial', sans-serif;
+
+  /* Overlay */
+  --crt-display: none;
+  /* Headers & Primary Actions */
+  --header-bg: linear-gradient(90deg, #000080 0%, #1084d0 100%);
+  /* Navy Blue to Lighter Blue Gradient */
+  --header-text: #ffffff;
+  /* White text for Headers */
+  --primary-btn-bg: #c0c0c0;
+  /* Silver for Primary Buttons (Gray as requested) */
+  --primary-btn-text: #000000;
+  /* Black text */
+  --highlight-bg: #000080;
+  /* Navy Blue for selection */
+  --highlight-text: #ffffff;
+  /* White text */
+  /* White text */
+
+  /* System Messages */
+  --sys-msg-color: #000080;
+  /* Navy for Light Mode */
+  --sys-msg-border: #000080;
+  /* Navy dotted line */
 }
 
 a {
   font-weight: 500;
   color: #646cff;
+  /* Default React Link Color? */
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -46,9 +163,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -57,11 +176,13 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    /* background-color: #ffffff; Removed to avoid conflict with our themes */
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
   }

@@ -18,7 +18,7 @@ export default function HowToPlayModal({ onClose }) {
             title: t('howToPlay.step2Title'),
             content: (
                 <div style={{ textAlign: 'left' }}>
-                    <div className="win-box" style={{ padding: '10px', marginBottom: '10px', background: '#111', whiteSpace: 'pre-wrap' }}>
+                    <div className="win-box" style={{ padding: '10px', marginBottom: '10px', background: 'var(--list-bg)', whiteSpace: 'pre-wrap' }}>
                         {t('howToPlay.step2Example')}
                     </div>
                     <p style={{ whiteSpace: 'pre-wrap' }}>{t('howToPlay.step2Desc')}</p>
@@ -31,7 +31,7 @@ export default function HowToPlayModal({ onClose }) {
                 <div style={{ textAlign: 'left' }}>
                     <p>{t('howToPlay.step3Desc')}</p>
                     <ul style={{ listStyle: 'none', padding: 0 }}>
-                        <li style={{ marginBottom: '5px' }}>{t('howToPlay.step3Q1')} <br /><span style={{ color: 'red' }}>{t('howToPlay.step3A1')}</span></li>
+                        <li style={{ marginBottom: '5px' }}>{t('howToPlay.step3Q1')} <br /><span style={{ color: 'var(--alert-red)' }}>{t('howToPlay.step3A1')}</span></li>
                         <li style={{ marginBottom: '5px' }}>{t('howToPlay.step3Q2')} <br /><span style={{ color: 'var(--main-green)' }}>{t('howToPlay.step3A2')}</span></li>
                         <li style={{ marginBottom: '5px' }}>{t('howToPlay.step3Q3')} <br /><span style={{ color: 'var(--main-green)' }}>{t('howToPlay.step3A3')}</span></li>
                     </ul>
@@ -44,7 +44,7 @@ export default function HowToPlayModal({ onClose }) {
             content: (
                 <div style={{ textAlign: 'left' }}>
                     <p>{t('howToPlay.step4Desc')}</p>
-                    <div className="win-box" style={{ padding: '10px', marginTop: '10px', background: '#111', fontSize: '0.9em', whiteSpace: 'pre-wrap' }}>
+                    <div className="win-box" style={{ padding: '10px', marginTop: '10px', background: 'var(--list-bg)', fontSize: '0.9em', whiteSpace: 'pre-wrap' }}>
                         {t('howToPlay.step4Answer')}
                     </div>
                 </div>

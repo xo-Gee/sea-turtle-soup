@@ -12,12 +12,13 @@ export default function RetroModal({ isOpen, type, title, message, onConfirm, on
             display: 'flex', justifyContent: 'center', alignItems: 'center'
         }}>
             <div className="win-box" style={{
-                width: '85%', maxWidth: '320px', background: '#000',
+                width: '85%', maxWidth: '320px', background: 'var(--panel-bg)',
                 boxShadow: '10px 10px 0px rgba(0,0,0,0.5)',
-                border: '2px solid var(--main-green)'
+                border: '2px solid var(--main-green)',
+                color: 'var(--text-color)'
             }}>
                 <div style={{
-                    background: 'var(--main-green)', color: '#000',
+                    background: 'var(--header-bg)', color: 'var(--header-text)',
                     padding: '5px 10px', fontWeight: 'bold',
                     marginBottom: '15px', display: 'flex', justifyContent: 'space-between'
                 }}>
@@ -25,7 +26,7 @@ export default function RetroModal({ isOpen, type, title, message, onConfirm, on
                     <span style={{ cursor: 'pointer' }} onClick={onCancel}>[X]</span>
                 </div>
 
-                <div style={{ padding: '0 10px 15px 10px', color: '#fff', lineHeight: '1.5', whiteSpace: 'pre-wrap' }}>
+                <div style={{ padding: '0 10px 15px 10px', color: 'var(--text-color)', lineHeight: '1.5', whiteSpace: 'pre-wrap' }}>
                     {message}
                     {children}
                 </div>

@@ -1,7 +1,13 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import RetroModal from '../components/RetroModal';
 
-const ModalContext = createContext();
+const ModalContext = createContext({
+    showAlert: (msg) => { console.error("DISCONNECTED CONTEXT"); alert("System Error: Modal Context disconnected. " + msg); return Promise.resolve(true); },
+    showConfirm: () => { console.error("DISCONNECTED CONTEXT"); alert("System Error: Modal Context disconnected."); return Promise.resolve(true); },
+    showPrompt: () => { console.error("DISCONNECTED CONTEXT"); alert("System Error: Modal Context disconnected."); return Promise.resolve(null); },
+    showCustom: () => { console.error("DISCONNECTED CONTEXT"); alert("System Error: Modal Context disconnected."); },
+    close: () => { }
+});
 
 export const useModal = () => useContext(ModalContext);
 
@@ -15,6 +21,12 @@ export const ModalProvider = ({ children }) => {
         onCancel: () => { },
         children: null
     });
+
+    // DEBUG: Check if Provider mounts
+    useEffect(() => {
+        console.log('ModalProvider: MOUNTED');
+        return () => console.log('ModalProvider: UNMOUNTED');
+    }, []);
 
     const close = useCallback(() => {
         setModalState(prev => ({ ...prev, isOpen: false }));

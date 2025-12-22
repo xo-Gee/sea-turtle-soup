@@ -232,7 +232,7 @@ export default function WaitingRoom() {
             <div className="win-box"
                 style={{
                     textAlign: 'center', padding: '10px', cursor: 'pointer',
-                    background: questioner ? '#000' : '#111',
+                    background: questioner ? 'var(--list-bg)' : 'transparent',
                     borderStyle: questioner ? 'solid' : 'dashed'
                 }}
                 onClick={handleToggleRole}
@@ -293,14 +293,15 @@ export default function WaitingRoom() {
                             display: 'flex',
                             justifyContent: 'center',
                             alignItems: 'center',
-                            background: 'rgba(0, 0, 0, 0.7)',
-                            border: '1px solid var(--main-green)',
-                            color: 'var(--main-green)',
-                            zIndex: 100
+                            background: 'var(--panel-bg)',
+                            border: '1px solid var(--win-border-color)',
+                            color: 'var(--text-color)',
+                            zIndex: 100,
+                            boxShadow: '2px 2px 0px var(--win-shadow-color)'
                         }}
                         onClick={scrollToBottom}
                     >
-                        ↓
+                        <span style={{ fontSize: '20px', fontWeight: 'bold' }}>↓</span>
                     </button>
                 )}
             </div>
@@ -330,7 +331,11 @@ export default function WaitingRoom() {
                     </button>
                 ) : (
                     <button className="retro-btn"
-                        style={{ width: '100%', background: me?.isReady ? 'var(--dim-green)' : 'var(--main-green)', color: '#000' }}
+                        style={{
+                            width: '100%',
+                            background: me?.isReady ? 'var(--highlight-bg)' : 'var(--primary-btn-bg)',
+                            color: me?.isReady ? 'var(--highlight-text)' : 'var(--primary-btn-text)'
+                        }}
                         onClick={handleReady}
                     >
                         {me?.isReady ? t('waitingRoom.ready') : t('waitingRoom.getReady')}

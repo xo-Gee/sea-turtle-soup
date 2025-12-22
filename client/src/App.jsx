@@ -13,8 +13,10 @@ import Credits from './pages/Credits';
 import RoomGuard from './components/RoomGuard';
 import { ModalProvider } from './context/ModalContext';
 import { LanguageProvider } from './context/LanguageContext';
+import { ThemeProvider } from './context/ThemeContext';
 
 function App() {
+  // App Component
   useEffect(() => {
     socket.connect();
 
@@ -24,30 +26,32 @@ function App() {
   }, []);
 
   return (
-    <LanguageProvider>
-      <ModalProvider>
-        <BrowserRouter>
-          <div className="mockup-frame">
-            <div className="crt-overlay"></div>
-            <Routes>
-              <Route path="/" element={<Landing />} />
-              <Route path="/lobby" element={<Lobby />} />
-              <Route path="/lobby" element={<Lobby />} />
-              <Route element={<RoomGuard />}>
-                <Route path="/room/:roomId" element={<WaitingRoom />} />
-                <Route path="/game/:roomId" element={<GameRoom />} />
-                <Route path="/result/:roomId" element={<Result />} />
-              </Route>
-              <Route path="/not-found" element={<NotFound />} />
-              <Route path="/privacy" element={<PrivacyPolicy />} />
-              <Route path="/terms" element={<TermsOfService />} />
-              <Route path="/credits" element={<Credits />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </div>
-        </BrowserRouter>
-      </ModalProvider>
-    </LanguageProvider>
+    <ThemeProvider>
+      <LanguageProvider>
+        <ModalProvider>
+          <BrowserRouter>
+            <div className="mockup-frame">
+              <div className="crt-overlay"></div>
+              <Routes>
+                <Route path="/" element={<Landing />} />
+                <Route path="/lobby" element={<Lobby />} />
+                <Route path="/lobby" element={<Lobby />} />
+                <Route element={<RoomGuard />}>
+                  <Route path="/room/:roomId" element={<WaitingRoom />} />
+                  <Route path="/game/:roomId" element={<GameRoom />} />
+                  <Route path="/result/:roomId" element={<Result />} />
+                </Route>
+                <Route path="/not-found" element={<NotFound />} />
+                <Route path="/privacy" element={<PrivacyPolicy />} />
+                <Route path="/terms" element={<TermsOfService />} />
+                <Route path="/credits" element={<Credits />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </div>
+          </BrowserRouter>
+        </ModalProvider>
+      </LanguageProvider>
+    </ThemeProvider>
   );
 }
 

@@ -84,12 +84,12 @@ export default function Lobby() {
                         <div key={room.roomId} className="room-item"
                             style={{
                                 display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                                background: '#000', border: '1px solid var(--dim-green)', padding: '10px', cursor: 'pointer'
+                                background: 'var(--list-bg)', border: '1px solid var(--dim-green)', padding: '10px', cursor: 'pointer'
                             }}
                             onClick={() => handleJoinRoom(room.roomId, !!room.password)}
                         >
                             <div>
-                                <div style={{ fontWeight: 'bold', color: '#fff' }}>{room.title} {room.password ? '🔒' : ''}</div>
+                                <div style={{ fontWeight: 'bold', color: 'var(--list-text)' }}>{room.title} {room.password ? '🔒' : ''}</div>
                                 <div style={{ fontSize: '14px', color: '#888' }}>{t('lobby.host')} {room.players.find(p => p.isHost)?.nickname}</div>
                             </div>
                             <span className={`status-badge ${room.status === 'WAITING' ? 'wait' : ''}`}
@@ -110,7 +110,7 @@ export default function Lobby() {
             </div>
 
             <button className="retro-btn"
-                style={{ marginTop: 'auto', background: 'var(--main-green)', color: '#000' }}
+                style={{ marginTop: 'auto', background: 'var(--primary-btn-bg)', color: 'var(--primary-btn-text)' }}
                 onClick={() => setShowModal(true)}
             >
                 {t('lobby.createRoom')}

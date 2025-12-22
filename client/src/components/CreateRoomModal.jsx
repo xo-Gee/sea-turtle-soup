@@ -25,7 +25,7 @@ export default function CreateRoomModal({ onClose, nickname }) {
             background: 'rgba(0,0,0,0.8)', zIndex: 1000,
             display: 'flex', justifyContent: 'center', alignItems: 'center'
         }}>
-            <div className="win-box" style={{ width: '80%', background: '#000' }}>
+            <div className="win-box" style={{ width: '80%' }}>
                 <h3 style={{ marginTop: 0, borderBottom: '1px solid var(--main-green)', paddingBottom: '10px' }}>{t('lobby.createRoomTitle')}</h3>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>

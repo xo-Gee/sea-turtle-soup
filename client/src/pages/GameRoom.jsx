@@ -179,19 +179,19 @@ export default function GameRoom() {
                         if (items.length === 0) return null;
 
                         const borderColor = type === 'YES' ? 'var(--alert-red)' :
-                            type === 'NO' ? 'red' :
-                                type === 'CRITICAL' ? 'var(--main-green)' : '#888';
+                            type === 'NO' ? 'var(--text-color)' :
+                                type === 'CRITICAL' ? 'var(--main-green)' : 'var(--text-color)';
 
-                        const textColor = type === 'YES' ? '#fff' :
+                        const textColor = type === 'YES' ? 'var(--alert-red)' :
                             type === 'NO' ? 'red' :
-                                type === 'CRITICAL' ? 'var(--main-green)' : '#888';
+                                type === 'CRITICAL' ? 'var(--main-green)' : 'var(--text-color)';
 
                         return (
                             <div key={type} className="win-box" style={{ margin: 0, borderColor: borderColor, color: textColor, textAlign: 'left' }}>
                                 <div style={{ fontWeight: 'bold', borderBottom: `1px dashed ${borderColor}`, marginBottom: '5px', paddingBottom: '3px' }}>
                                     {type} ({items.length})
                                 </div>
-                                <ul style={{ listStyle: 'none', padding: 0, margin: 0, color: '#ccc', fontSize: '0.9em' }}>
+                                <ul style={{ listStyle: 'none', padding: 0, margin: 0, color: 'var(--text-color)', fontSize: '0.9em' }}>
                                     {items.map(item => (
                                         <li key={item.id} style={{ marginBottom: '3px' }}>
                                             - {item.question}
@@ -265,7 +265,7 @@ export default function GameRoom() {
         setInputMsg('');
     };
 
-    if (!room) return <div style={{ color: 'white' }}>Loading...</div>;
+    if (!room) return <div style={{ color: 'var(--text-color)' }}>Loading...</div>;
 
     return (
         <div id="screen-game" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -292,10 +292,10 @@ export default function GameRoom() {
                             fontSize: '12px',
                             padding: '2px 8px',
                             marginLeft: '10px',
-                            background: 'var(--main-green)',
+                            background: 'var(--button-bg)',
                             color: '#000',
                             fontWeight: 'bold',
-                            borderColor: '#000'
+                            border: '1px outset #fff'
                         }} onClick={handleViewAnswers}>
                             📑 {t('gameRoom.viewAnswers')}
                         </button>
@@ -313,7 +313,7 @@ export default function GameRoom() {
                         <div style={{ marginTop: '10px', fontWeight: 'bold', color: 'var(--main-green)', fontSize: '1.1em' }}>
                             {room.scenario?.title}
                         </div>
-                        <div style={{ marginTop: '5px', color: '#fff' }}>
+                        <div style={{ marginTop: '5px', color: 'var(--list-text)' }}>
                             {room.scenario?.content}
                         </div>
                         {isQuestioner && (
@@ -420,14 +420,15 @@ export default function GameRoom() {
                             display: 'flex',
                             justifyContent: 'center',
                             alignItems: 'center',
-                            background: 'rgba(0, 0, 0, 0.7)',
-                            border: '1px solid var(--main-green)',
-                            color: 'var(--main-green)',
-                            zIndex: 100
+                            background: 'var(--panel-bg)',
+                            border: '1px solid var(--win-border-color)',
+                            color: 'var(--text-color)',
+                            zIndex: 100,
+                            boxShadow: '2px 2px 0px var(--win-shadow-color)'
                         }}
                         onClick={scrollToBottom}
                     >
-                        ↓
+                        <span style={{ fontSize: '20px', fontWeight: 'bold' }}>↓</span>
                     </button>
                 )}
             </div>
@@ -446,7 +447,7 @@ export default function GameRoom() {
                     </button>
                 )}
                 <input type="text" className="retro-input"
-                    style={{ flexGrow: 1, background: '#fff', color: '#000', fontSize: '16px', minWidth: 0 }}
+                    style={{ flexGrow: 1, background: 'var(--input-bg)', color: 'var(--input-text)', fontSize: '16px', minWidth: 0 }}
                     placeholder={isQuestioner ? (isHintMode ? t('gameRoom.enterHint') : t('gameRoom.clickQuestionToAnswer')) : t('gameRoom.enterQuestion')}
                     value={inputMsg}
                     onChange={e => setInputMsg(e.target.value)}

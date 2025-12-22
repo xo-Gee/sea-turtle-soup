@@ -4,6 +4,7 @@ import { socket } from '../socket';
 import { useModal } from '../context/ModalContext';
 import { useLanguage } from '../context/LanguageContext';
 import HowToPlayModal from '../components/HowToPlayModal';
+import ThemeToggle from '../components/ThemeToggle';
 
 
 export default function Landing() {
@@ -29,31 +30,31 @@ export default function Landing() {
             message: null,
             children: (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '15px' }}>
-                    <button className="retro-btn" style={{ background: language === 'ko' ? 'var(--main-green)' : 'transparent', color: language === 'ko' ? '#000' : 'var(--main-green)' }}
+                    <button className="retro-btn" style={{ background: language === 'ko' ? 'var(--highlight-bg)' : 'transparent', color: language === 'ko' ? 'var(--highlight-text)' : 'var(--main-green)' }}
                         onClick={() => { setLanguage('ko'); close(); }}>
                         한국어
                     </button>
-                    <button className="retro-btn" style={{ background: language === 'en' ? 'var(--main-green)' : 'transparent', color: language === 'en' ? '#000' : 'var(--main-green)' }}
+                    <button className="retro-btn" style={{ background: language === 'en' ? 'var(--highlight-bg)' : 'transparent', color: language === 'en' ? 'var(--highlight-text)' : 'var(--main-green)' }}
                         onClick={() => { setLanguage('en'); close(); }}>
                         English
                     </button>
-                    <button className="retro-btn" style={{ background: language === 'ja' ? 'var(--main-green)' : 'transparent', color: language === 'ja' ? '#000' : 'var(--main-green)' }}
+                    <button className="retro-btn" style={{ background: language === 'ja' ? 'var(--highlight-bg)' : 'transparent', color: language === 'ja' ? 'var(--highlight-text)' : 'var(--main-green)' }}
                         onClick={() => { setLanguage('ja'); close(); }}>
                         日本語
                     </button>
-                    <button className="retro-btn" style={{ background: language === 'es' ? 'var(--main-green)' : 'transparent', color: language === 'es' ? '#000' : 'var(--main-green)' }}
+                    <button className="retro-btn" style={{ background: language === 'es' ? 'var(--highlight-bg)' : 'transparent', color: language === 'es' ? 'var(--highlight-text)' : 'var(--main-green)' }}
                         onClick={() => { setLanguage('es'); close(); }}>
                         Español
                     </button>
-                    <button className="retro-btn" style={{ background: language === 'fr' ? 'var(--main-green)' : 'transparent', color: language === 'fr' ? '#000' : 'var(--main-green)' }}
+                    <button className="retro-btn" style={{ background: language === 'fr' ? 'var(--highlight-bg)' : 'transparent', color: language === 'fr' ? 'var(--highlight-text)' : 'var(--main-green)' }}
                         onClick={() => { setLanguage('fr'); close(); }}>
                         Français
                     </button>
-                    <button className="retro-btn" style={{ background: language === 'zhCN' ? 'var(--main-green)' : 'transparent', color: language === 'zhCN' ? '#000' : 'var(--main-green)' }}
+                    <button className="retro-btn" style={{ background: language === 'zhCN' ? 'var(--highlight-bg)' : 'transparent', color: language === 'zhCN' ? 'var(--highlight-text)' : 'var(--main-green)' }}
                         onClick={() => { setLanguage('zhCN'); close(); }}>
                         简体中文
                     </button>
-                    <button className="retro-btn" style={{ background: language === 'zhTW' ? 'var(--main-green)' : 'transparent', color: language === 'zhTW' ? '#000' : 'var(--main-green)' }}
+                    <button className="retro-btn" style={{ background: language === 'zhTW' ? 'var(--highlight-bg)' : 'transparent', color: language === 'zhTW' ? 'var(--highlight-text)' : 'var(--main-green)' }}
                         onClick={() => { setLanguage('zhTW'); close(); }}>
                         繁體中文
                     </button>
@@ -94,9 +95,10 @@ export default function Landing() {
             height: '100%',
             padding: '20px',
             textAlign: 'center',
-            background: 'radial-gradient(circle, #001100 0%, #000000 90%)',
+            background: 'var(--bg-color)',
             position: 'relative'
         }}>
+            <ThemeToggle />
             <button
                 className="retro-btn"
                 style={{ position: 'absolute', top: '10px', right: '10px', fontSize: '24px', padding: '5px', lineHeight: 1, border: 'none', background: 'transparent' }}
@@ -157,9 +159,9 @@ export default function Landing() {
                     style={{
                         position: 'absolute',
                         bottom: '30px',
-                        background: '#000',
-                        border: '1px dashed var(--main-green)',
-                        color: 'var(--main-green)',
+                        background: 'var(--button-bg)',
+                        border: '1px outset #fff',
+                        color: '#000',
                         fontSize: '12px',
                         padding: '5px 15px'
                     }}
