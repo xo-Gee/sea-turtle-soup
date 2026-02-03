@@ -12,7 +12,7 @@ export default function Lobby() {
     const nickname = sessionStorage.getItem('nickname');
 
     const { showAlert, showPrompt } = useModal();
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
 
     useEffect(() => {
         if (!nickname) {
@@ -73,7 +73,7 @@ export default function Lobby() {
 
             <div className="win-box" style={{ textAlign: 'center', marginBottom: '20px' }}>
                 {t('lobby.title')}
-                <div style={{ fontSize: '10px', color: '#666', marginTop: '5px' }}>v0.5.0</div>
+                <div style={{ fontSize: '10px', color: '#666', marginTop: '5px' }}>v0.4.0</div>
             </div>
 
             <div className="room-list" style={{ flexGrow: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -110,20 +110,14 @@ export default function Lobby() {
             </div>
 
             <div style={{ marginTop: 'auto', display: 'flex', gap: '10px' }}>
-                <button className="retro-btn"
-                    style={{
-                        flex: 1,
-                        background: t('langCode') === 'ko' ? 'var(--highlight-bg)' : '#999',
-                        color: t('langCode') === 'ko' ? 'var(--highlight-text)' : '#ccc',
-                        cursor: t('langCode') === 'ko' ? 'pointer' : 'not-allowed',
-                        opacity: t('langCode') === 'ko' ? 1 : 0.6
-                    }}
-                    onClick={() => t('langCode') === 'ko' && navigate('/single')}
-                    disabled={t('langCode') !== 'ko'}
-                    title={t('langCode') !== 'ko' ? "Only available in Korean" : "AI Mode"}
-                >
-                    AI 모드 {t('langCode') !== 'ko' && '(KO only)'}
-                </button>
+                {language === 'ko' && (
+                    <button className="retro-btn"
+                        style={{ flex: 1, background: 'var(--highlight-bg)', color: 'var(--highlight-text)' }}
+                        onClick={() => navigate('/single')}
+                    >
+                        AI 모드
+                    </button>
+                )}
                 <button className="retro-btn"
                     style={{ flex: 1, background: 'var(--primary-btn-bg)', color: 'var(--primary-btn-text)' }}
                     onClick={() => setShowModal(true)}
