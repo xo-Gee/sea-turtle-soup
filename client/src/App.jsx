@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import { socket } from './socket';
 import Landing from './pages/Landing';
 import Lobby from './pages/Lobby';
+import SinglePlay from './pages/SinglePlay';
 import WaitingRoom from './pages/WaitingRoom';
 import GameRoom from './pages/GameRoom';
 import Result from './pages/Result';
@@ -36,6 +37,7 @@ function App() {
                 <Route path="/" element={<Landing />} />
                 <Route path="/lobby" element={<Lobby />} />
                 <Route path="/lobby" element={<Lobby />} />
+                <Route path="/single" element={<SinglePlay />} />
                 <Route element={<RoomGuard />}>
                   <Route path="/room/:roomId" element={<WaitingRoom />} />
                   <Route path="/game/:roomId" element={<GameRoom />} />
