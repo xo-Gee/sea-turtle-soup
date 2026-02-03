@@ -1,2 +1,4 @@
 const rooms = new Map();
-module.exports = { rooms };
+const singleSessions = new Map(); // Store single player states: { socketId: { scenario, messages, hintsLeft, ... } }
+
+module.exports = { rooms, singleSessions };

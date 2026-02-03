@@ -109,12 +109,28 @@ export default function Lobby() {
                 </div>
             </div>
 
-            <button className="retro-btn"
-                style={{ marginTop: 'auto', background: 'var(--primary-btn-bg)', color: 'var(--primary-btn-text)' }}
-                onClick={() => setShowModal(true)}
-            >
-                {t('lobby.createRoom')}
-            </button>
+            <div style={{ marginTop: 'auto', display: 'flex', gap: '10px' }}>
+                <button className="retro-btn"
+                    style={{
+                        flex: 1,
+                        background: t('langCode') === 'ko' ? 'var(--highlight-bg)' : '#999',
+                        color: t('langCode') === 'ko' ? 'var(--highlight-text)' : '#ccc',
+                        cursor: t('langCode') === 'ko' ? 'pointer' : 'not-allowed',
+                        opacity: t('langCode') === 'ko' ? 1 : 0.6
+                    }}
+                    onClick={() => t('langCode') === 'ko' && navigate('/single')}
+                    disabled={t('langCode') !== 'ko'}
+                    title={t('langCode') !== 'ko' ? "Only available in Korean" : "AI Mode"}
+                >
+                    AI 모드 {t('langCode') !== 'ko' && '(KO only)'}
+                </button>
+                <button className="retro-btn"
+                    style={{ flex: 1, background: 'var(--primary-btn-bg)', color: 'var(--primary-btn-text)' }}
+                    onClick={() => setShowModal(true)}
+                >
+                    {t('lobby.createRoom')}
+                </button>
+            </div>
 
             {showModal && <CreateRoomModal onClose={() => setShowModal(false)} nickname={nickname} />}
         </div>

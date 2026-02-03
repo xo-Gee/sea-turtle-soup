@@ -19,6 +19,7 @@ const PORT = process.env.PORT || 3077;
 // Socket.io event handlers
 const registerRoomHandlers = require('./socket/roomHandler');
 const registerGameHandlers = require('./socket/gameHandler');
+const registerSingleHandlers = require('./socket/singleHandler');
 
 const fs = require('fs');
 const path = require('path');
@@ -77,6 +78,7 @@ const onConnection = (socket) => {
 
     registerRoomHandlers(io, socket);
     registerGameHandlers(io, socket);
+    registerSingleHandlers(io, socket);
 
     socket.on('disconnect', () => {
         console.log(`User disconnected: ${socket.id}`);
