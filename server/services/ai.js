@@ -11,7 +11,13 @@ require('dotenv').config();
 // In CommonJS: 
 const { GoogleGenAI } = require('@google/genai');
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+const getAiClient = () => {
+    if (!process.env.GEMINI_API_KEY) {
+        console.error("❌ GEMINI_API_KEY is missing!");
+        return null;
+    }
+    return new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+};
 const MODEL_NAME = 'gemini-2.0-flash-exp'; // Fallback first? user asked for 3.0.
 // Docs URL provided has explicit 'gemini-3-flash-preview'. 
 // I will use that.
@@ -69,6 +75,9 @@ const generateResponse = async (userMessage, scenario) => {
 
 답변은 오직 위 키워드 단어 하나만 출력하십시오. (예: YES, NO, CRITICAL, SKIP, CORRECT)
 `;
+
+        const ai = getAiClient();
+        if (!ai) return '시스템 오류: AI 설정 오류';
 
         // Official SDK usage
         const response = await ai.models.generateContent({
