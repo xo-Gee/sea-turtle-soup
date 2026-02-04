@@ -13,7 +13,8 @@ module.exports = (io, socket) => {
             socketId: socket.id,
             scenario: scenario,
             messages: [],
-            hintsLeft: 5, // Default max hints
+            hintsLeft: scenario.hints ? scenario.hints.length : 0,
+            hintsUsed: 0,
             startTime: Date.now(),
             status: 'PLAYING'
         };
@@ -36,6 +37,28 @@ module.exports = (io, socket) => {
         };
         session.messages.push(welcomeMsg);
         socket.emit('single_message_received', welcomeMsg);
+    };
+
+    // Handle Hint Request
+    const handleHintRequest = () => {
+        const session = singleSessions.get(socket.id);
+        if (!session || session.status !== 'PLAYING') return;
+
+        if (session.hintsLeft > 0) {
+            const hint = session.scenario.hints[session.hintsUsed];
+            session.hintsUsed++;
+            session.hintsLeft--;
+
+            const hintMsg = {
+                id: Date.now(),
+                type: 'HINT',
+                message: hint,
+                timestamp: Date.now()
+            };
+            session.messages.push(hintMsg);
+            socket.emit('single_message_received', hintMsg);
+            socket.emit('single_hints_update', { hintsLeft: session.hintsLeft });
+        }
     };
 
     // Handle Chat
@@ -100,6 +123,7 @@ module.exports = (io, socket) => {
     };
 
     socket.on('start_single_game', startSingleGame);
+    socket.on('single_hint_request', handleHintRequest);
     socket.on('single_chat', singleChat);
     socket.on('leave_single_game', leaveSingleGame);
 
