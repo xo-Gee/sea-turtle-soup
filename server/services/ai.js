@@ -81,7 +81,7 @@ const generateResponse = async (userMessage, scenario) => {
 
         // Official SDK usage
         const response = await ai.models.generateContent({
-            model: 'gemini-3-flash-preview',
+            model: 'gemini-1.5-flash',
             contents: systemPrompt // The SDK accepts string directly for convenience
         });
 
