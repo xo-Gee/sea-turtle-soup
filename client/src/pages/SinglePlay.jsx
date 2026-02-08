@@ -303,8 +303,8 @@ const SinglePlay = () => {
                 <button
                     className="retro-btn"
                     style={{
-                        background: hintsLeft > 0 ? 'var(--main-green)' : '#333',
-                        color: hintsLeft > 0 ? '#000' : '#888',
+                        background: hintsLeft > 0 ? (theme === 'light' ? '#000080' : 'var(--main-green)') : '#333',
+                        color: hintsLeft > 0 ? (theme === 'light' ? '#ffffff' : '#000') : '#888',
                         padding: '0 15px',
                         whiteSpace: 'nowrap'
                     }}
