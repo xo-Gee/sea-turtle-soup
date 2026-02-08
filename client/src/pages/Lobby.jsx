@@ -73,7 +73,7 @@ export default function Lobby() {
 
             <div className="win-box" style={{ textAlign: 'center', marginBottom: '20px' }}>
                 {t('lobby.title')}
-                <div style={{ fontSize: '10px', color: '#666', marginTop: '5px' }}>v0.4.0</div>
+                {/* <div style={{ fontSize: '10px', color: '#666', marginTop: '5px' }}>v0.4.0</div> */}
             </div>
 
             <div className="room-list" style={{ flexGrow: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '10px' }}>
